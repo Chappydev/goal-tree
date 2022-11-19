@@ -1,0 +1,55 @@
+@use './Tree';
+
+/* 
+  IDEA: Maybe it makes better sense to do this layout
+  with absolute positioning instead.
+  This would allow us to do the calculations for spacing
+  using javascript, and would simplify adding the lines
+  between nodes (we would know where the center of each 
+  node is from our calculations).
+*/
+
+$row-height: calc(calc(Tree.$height - calc(Tree.$padding * 2)) / 5);
+$box-bgcolor: red;
+$box-color: white;
+
+.tree-children-wrapper {
+  // flex: 1 1 auto;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.tree-node-wrapper {
+  flex: 1 1 0;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: stretch;
+}
+
+.tree-node {
+  display: flex;
+  justify-content: center;
+  height: calc($row-height);
+}
+
+.node-inner-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  background-color: $box-bgcolor;
+  color: $box-color;
+  border-radius: 20px;
+
+  &.goal-node {
+    width: 200px;
+    height: calc($row-height * 0.8);
+  }
+  &.task-node {
+    width: calc($row-height * 0.8);
+    height: calc($row-height * 0.8);
+  }
+}

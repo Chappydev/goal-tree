@@ -1,0 +1,41 @@
+#task-view-container {
+  position: relative;
+  height: 100%;
+  width: 100%;
+
+  .left-arrow {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    left: 0.5em;
+    top: 50%;
+    transform: translateX(-50%);
+    height: 3em;
+    width: 1em;
+  }
+
+  .right-arrow {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    right: 0px;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 3em;
+    width: 1em;
+  }
+
+  .top-arrow {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0.5em;
+    left: 50%;
+    transform: translateY(-50%);
+    width: 3em;
+    height: 1em;
+  }
+}

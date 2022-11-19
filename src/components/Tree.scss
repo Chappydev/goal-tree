@@ -1,0 +1,13 @@
+$height: 500px;
+$padding: 16px;
+
+.tree-wrapper {
+  width: 800px;
+  height: $height;
+  padding: $padding;
+  // temporary border for dev purposes
+  border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
