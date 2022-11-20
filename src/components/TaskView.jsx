@@ -5,19 +5,14 @@ import './TaskView.scss';
 
 const TaskView = ({ tree }) => {
   const id = useParams().id;
-  const task = treeHelper.findNodeById(tree, id);
-
-  const prevSibling = {
-    id: 1
-  };
-
-  const parent = {
-    id: 2
-  };
-
-  const nextSibling = {
-    id: 3
-  };
+  const {
+    parent,
+    currentNode: task,
+    prevSibling,
+    nextSibling,
+    children
+  } = treeHelper.findFamilyByIdBFS(tree, id);
+  console.log(treeHelper.findFamilyByIdBFS(tree, id));
 
   // const relativeParent = {
   //   position: 'relative',
@@ -63,6 +58,7 @@ const TaskView = ({ tree }) => {
 
   return (
     <div id="task-view-container">
+      {/* TODO: fix link when there is no parent/sibling/whatever */}
       <NavLink to={`/task/${prevSibling.id}`} className="left-arrow">
         &lt;
       </NavLink>
@@ -72,9 +68,20 @@ const TaskView = ({ tree }) => {
       <NavLink to={`/task/${nextSibling.id}`} className="right-arrow">
         &gt;
       </NavLink>
-      {/* <div id="top-arrow">^</div>
-      <div id="right-arrow">&gt;</div> */}
       <div id="content">{task.name}</div>
+      <div id="children">
+        {children.map((child) => {
+          return (
+            <NavLink
+              to={`/task/${child.id}`}
+              className="child-task"
+              key={child.id}
+            >
+              {child.name}
+            </NavLink>
+          );
+        })}
+      </div>
     </div>
   );
 };

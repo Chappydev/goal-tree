@@ -1,3 +1,5 @@
+import Queue from './queue';
+
 const findDeepestLayer = (tree) => {
   let deepestLayer = 0;
   let currentDepth = 0;
@@ -60,4 +62,111 @@ const findNodeById = (tree, id) => {
   return testNode;
 };
 
-export default { findDeepestLayer, findBroadestLayer, findNodeById };
+const findNodeByIdBFS = (node, id) => {
+  if (!node) {
+    return false;
+  }
+
+  let queue = new Queue();
+
+  queue.enqueue(node);
+
+  while (queue.size !== 0) {
+    if (queue.first.value.id === id) {
+      return queue.first.value;
+    }
+
+    const nodeChildren = queue.first.value.children;
+
+    if (nodeChildren.length !== 0) {
+      nodeChildren.forEach((child) => queue.enqueue(child));
+    }
+
+    queue.dequeue();
+  }
+
+  return null;
+};
+
+const testBFS = (node) => {
+  if (!node) {
+    return false;
+  }
+
+  let queue = new Queue();
+
+  let nodeList = [];
+
+  queue.enqueue(node);
+
+  while (queue.size !== 0) {
+    console.log(queue.first.value);
+    const nodeChildren = queue.first.value.children;
+
+    if (nodeChildren.length !== 0) {
+      nodeChildren.forEach((child) => queue.enqueue(child));
+    }
+
+    nodeList.push(queue.first.value);
+
+    queue.dequeue();
+  }
+
+  return nodeList;
+};
+
+const findFamilyByIdBFS = (tree, id) => {
+  if (!tree) {
+    return false;
+  }
+
+  let queue = new Queue();
+
+  queue.enqueue(tree);
+
+  // Check if root node has matching id
+  if (queue.first.value.id.toString() === id) {
+    const parent = {};
+    const currentNode = queue.first.value;
+    const prevSibling = {};
+    const nextSibling = {};
+    const children = currentNode.children;
+
+    return { parent, currentNode, prevSibling, nextSibling, children };
+  }
+
+  while (queue.size !== 0) {
+    if (
+      queue.first.value.children.some((child) => child.id.toString() === id)
+    ) {
+      const parent = queue.first.value;
+      const currentNodeIndex = parent.children.findIndex(
+        (child) => child.id.toString() === id
+      );
+      const currentNode = parent.children[currentNodeIndex];
+      const prevSibling = parent.children[currentNodeIndex - 1] || {};
+      const nextSibling = parent.children[currentNodeIndex + 1] || {};
+      const children = currentNode.children;
+
+      return { parent, currentNode, prevSibling, nextSibling, children };
+    }
+
+    const nodeChildren = queue.first.value.children;
+
+    if (nodeChildren.length !== 0) {
+      nodeChildren.forEach((child) => queue.enqueue(child));
+    }
+
+    queue.dequeue();
+  }
+
+  return {};
+};
+
+export default {
+  findDeepestLayer,
+  findBroadestLayer,
+  findNodeByIdBFS,
+  findFamilyByIdBFS,
+  testBFS
+};

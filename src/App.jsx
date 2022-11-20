@@ -17,7 +17,9 @@ const testTreeData = {
       name: 'Eat Chicken',
       children: [
         {
-          name: 'Buy chicken'
+          id: 10,
+          name: 'Buy chicken',
+          children: []
         }
       ]
     },
@@ -35,23 +37,33 @@ const testTreeData = {
               children: [
                 {
                   id: 6,
-                  name: 'test'
+                  name: 'test',
+                  children: []
                 }
               ]
             },
             {
               id: 7,
-              name: 'Eat while making dinner'
+              name: 'Eat while making dinner',
+              children: []
             }
           ]
         },
         {
           id: 8,
-          name: 'Eat while doing backflips'
+          name: 'Eat while doing backflips',
+          children: [
+            {
+              id: 11,
+              name: "Don't choke",
+              children: []
+            }
+          ]
         },
         {
           id: 9,
-          name: 'Eat while singing'
+          name: 'Eat while singing',
+          children: []
         }
       ]
     }

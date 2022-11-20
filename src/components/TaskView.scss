@@ -39,3 +39,16 @@
     height: 1em;
   }
 }
+
+#content {
+  padding-top: 2em;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+#children {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
