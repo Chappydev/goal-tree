@@ -5,14 +5,14 @@ import './TaskView.scss';
 
 const TaskView = ({ tree }) => {
   const id = useParams().id;
-  const {
-    parent,
-    currentNode: task,
-    prevSibling,
-    nextSibling,
-    children
-  } = treeHelper.findFamilyByIdBFS(tree, id);
-  console.log(treeHelper.findFamilyByIdBFS(tree, id));
+  // const {
+  //   parent,
+  //   currentNode: task,
+  //   prevSibling,
+  //   nextSibling,
+  //   children
+  // } = treeHelper.findFamilyByIdBFS(tree, id);
+  const family = treeHelper.findFamilyByIdBFS(tree, id);
 
   // const relativeParent = {
   //   position: 'relative',
@@ -59,18 +59,30 @@ const TaskView = ({ tree }) => {
   return (
     <div id="task-view-container">
       {/* TODO: fix link when there is no parent/sibling/whatever */}
-      <NavLink to={`/task/${prevSibling.id}`} className="left-arrow">
-        &lt;
-      </NavLink>
-      <NavLink to={`/task/${parent.id}`} className="top-arrow">
-        ^
-      </NavLink>
-      <NavLink to={`/task/${nextSibling.id}`} className="right-arrow">
-        &gt;
-      </NavLink>
-      <div id="content">{task.name}</div>
+      {family.prevSibling ? (
+        <NavLink to={`/task/${family.prevSibling.id}`} className="left-arrow">
+          &lt;
+        </NavLink>
+      ) : (
+        <div className="left-arrow">&lt;</div>
+      )}
+      {family.parent ? (
+        <NavLink to={`/task/${family.parent.id}`} className="top-arrow">
+          ^
+        </NavLink>
+      ) : (
+        <div className="top-arrow">^</div>
+      )}
+      {family.nextSibling ? (
+        <NavLink to={`/task/${family.nextSibling.id}`} className="right-arrow">
+          &gt;
+        </NavLink>
+      ) : (
+        <div className="right-arrow">&gt;</div>
+      )}
+      <div id="content">{family.currentNode.name}</div>
       <div id="children">
-        {children.map((child) => {
+        {family.children.map((child) => {
           return (
             <NavLink
               to={`/task/${child.id}`}

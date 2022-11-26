@@ -126,10 +126,10 @@ const findFamilyByIdBFS = (tree, id) => {
 
   // Check if root node has matching id
   if (queue.first.value.id.toString() === id) {
-    const parent = {};
+    const parent = null;
     const currentNode = queue.first.value;
-    const prevSibling = {};
-    const nextSibling = {};
+    const prevSibling = null;
+    const nextSibling = null;
     const children = currentNode.children;
 
     return { parent, currentNode, prevSibling, nextSibling, children };
@@ -144,8 +144,8 @@ const findFamilyByIdBFS = (tree, id) => {
         (child) => child.id.toString() === id
       );
       const currentNode = parent.children[currentNodeIndex];
-      const prevSibling = parent.children[currentNodeIndex - 1] || {};
-      const nextSibling = parent.children[currentNodeIndex + 1] || {};
+      const prevSibling = parent.children[currentNodeIndex - 1] || null;
+      const nextSibling = parent.children[currentNodeIndex + 1] || null;
       const children = currentNode.children;
 
       return { parent, currentNode, prevSibling, nextSibling, children };
