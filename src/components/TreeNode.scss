@@ -53,3 +53,18 @@ $box-color: white;
     height: calc($row-height * 0.8);
   }
 }
+
+.tree-line-svg {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  overflow: visible;
+  z-index: -1;
+}
+
+.tree-line {
+  stroke: $box-bgcolor;
+  stroke-width: 2;
+}

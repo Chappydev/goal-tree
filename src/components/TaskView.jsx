@@ -58,7 +58,6 @@ const TaskView = ({ tree }) => {
 
   return (
     <div id="task-view-container">
-      {/* TODO: fix link when there is no parent/sibling/whatever */}
       {family.prevSibling ? (
         <NavLink to={`/task/${family.prevSibling.id}`} className="left-arrow">
           &lt;
