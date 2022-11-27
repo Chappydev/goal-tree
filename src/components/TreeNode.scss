@@ -43,6 +43,7 @@ $box-color: white;
   background-color: $box-bgcolor;
   color: $box-color;
   border-radius: 20px;
+  text-decoration: none;
 
   &.goal-node {
     width: 200px;

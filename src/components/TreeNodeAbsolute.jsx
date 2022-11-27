@@ -1,6 +1,7 @@
 import React from 'react';
 import './TreeNode.scss';
 import useRect from '../hooks/useRect';
+import { NavLink } from 'react-router-dom';
 
 const TreeNodeAbsolute = ({
   node,
@@ -37,9 +38,13 @@ const TreeNodeAbsolute = ({
       ) : null}
       <div className="tree-node" ref={ref}>
         {isGoal ? (
-          <div className="node-inner-box goal-node">{node.name}</div>
+          <NavLink to={`/task/${node.id}`} className="node-inner-box goal-node">
+            {node.name}
+          </NavLink>
         ) : (
-          <div className="node-inner-box task-node">{node.name}</div>
+          <NavLink to={`/task/${node.id}`} className="node-inner-box task-node">
+            {node.name}
+          </NavLink>
         )}
       </div>
       {node.children ? (
