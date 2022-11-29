@@ -17,7 +17,6 @@ const TreeNodeAbsolute = ({
   // to appropriately fit the space given for the tree.
 
   const [rect, ref] = useRect();
-  console.log(rect);
 
   return (
     <div className="tree-node-wrapper">
@@ -36,7 +35,7 @@ const TreeNodeAbsolute = ({
           />
         </svg>
       ) : null}
-      <div className="tree-node" ref={ref}>
+      <div className="tree-node">
         {/* {isGoal ? (
           <NavLink to={`/task/${node.id}`} className="node-inner-box goal-node">
             {node.name}
@@ -46,7 +45,7 @@ const TreeNodeAbsolute = ({
             {node.name}
           </NavLink>
         )} */}
-        <Node node={node} isGoal={isGoal} key={node.id} />
+        {/* <Node node={node} isGoal={isGoal} key={node.id} ref={ref} /> */}
       </div>
       {node.children ? (
         <div className="tree-children-wrapper">
