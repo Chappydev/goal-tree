@@ -2,6 +2,7 @@
   position: relative;
   height: 100%;
   width: 100%;
+  padding: 2em;
 
   .left-arrow {
     display: flex;
@@ -40,15 +41,26 @@
   }
 }
 
+#content {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 #current-node {
   padding-top: 2em;
   width: 100%;
+  height: 100%;
   display: flex;
   justify-content: center;
 }
 
 #children {
   width: 100%;
+  height: 100%;
   display: flex;
   justify-content: space-around;
 }

@@ -14,6 +14,7 @@ const TaskView = ({ tree }) => {
   //   children
   // } = treeHelper.findFamilyByIdBFS(tree, id);
   const family = treeHelper.findFamilyByIdBFS(tree, id);
+  const isGoal = family.parent ? false : true;
 
   // const relativeParent = {
   //   position: 'relative',
@@ -56,6 +57,7 @@ const TaskView = ({ tree }) => {
   //   width: '3em',
   //   height: '1em'
   // };
+  console.log(family);
 
   return (
     <div id="task-view-container">
@@ -95,11 +97,13 @@ const TaskView = ({ tree }) => {
             );
           })}
         </div> */}
-        <Node
-          node={family.currentNode}
-          isGoal={parent ? false : true}
-          key={family.currentNode.id}
-        />
+        <div id="current-node">
+          <Node
+            node={family.currentNode}
+            isGoal={isGoal}
+            key={family.currentNode.id}
+          />
+        </div>
         <div id="children">
           {family.children.map((child) => {
             return <Node node={child} isGoal={false} key={child.id} />;

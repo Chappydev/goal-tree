@@ -4,7 +4,6 @@ import { ReactQueryDevtools } from 'react-query/devtools';
 import { Route, Routes } from 'react-router-dom';
 import TaskView from './components/TaskView';
 import Tree from './components/Tree';
-import useDimensions from './hooks/useDimensions';
 
 const queryClient = new QueryClient();
 
@@ -84,6 +83,7 @@ const fillWindow = {
 };
 
 function App() {
+  console.log(testTreeData);
   return (
     <QueryClientProvider client={queryClient}>
       <div className="App" style={fillWindow}>

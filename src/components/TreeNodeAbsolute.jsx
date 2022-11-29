@@ -45,7 +45,7 @@ const TreeNodeAbsolute = ({
             {node.name}
           </NavLink>
         )} */}
-        {/* <Node node={node} isGoal={isGoal} key={node.id} ref={ref} /> */}
+        <Node node={node} isGoal={isGoal} key={node.id} ref={ref} />
       </div>
       {node.children ? (
         <div className="tree-children-wrapper">

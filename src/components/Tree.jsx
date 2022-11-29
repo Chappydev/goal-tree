@@ -1,7 +1,6 @@
 import React from 'react';
 import useDimensions from '../hooks/useDimensions';
 import './Tree.scss';
-import TreeNode from './TreeNode';
 import TreeNodeAbsolute from './TreeNodeAbsolute';
 import treeHelper from '../utility/treeHelper';
 
