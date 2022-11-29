@@ -37,7 +37,7 @@ const TreeNodeAbsolute = ({
         </svg>
       ) : null}
       <div className="tree-node" ref={ref}>
-        {isGoal ? (
+        {/* {isGoal ? (
           <NavLink to={`/task/${node.id}`} className="node-inner-box goal-node">
             {node.name}
           </NavLink>
@@ -45,7 +45,8 @@ const TreeNodeAbsolute = ({
           <NavLink to={`/task/${node.id}`} className="node-inner-box task-node">
             {node.name}
           </NavLink>
-        )}
+        )} */}
+        <Node node={node} isGoal={isGoal} key={node.id} />
       </div>
       {node.children ? (
         <div className="tree-children-wrapper">

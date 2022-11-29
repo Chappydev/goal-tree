@@ -18,7 +18,7 @@ const Tree = ({ data }) => {
   return (
     <div className="tree-wrapper">
       {/* <TreeNode node={data} dimensions={dimensions} /> */}
-      <TreeNodeAbsolute key={data.name} node={data} dimensions={dimensions} />
+      <TreeNodeAbsolute key={data.id} node={data} dimensions={dimensions} />
     </div>
   );
 };

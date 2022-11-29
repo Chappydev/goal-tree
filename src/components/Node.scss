@@ -1,0 +1,21 @@
+@use './TreeNode';
+
+.node {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  background-color: TreeNode.$box-bgcolor;
+  color: TreeNode.$box-color;
+  border-radius: 20px;
+  text-decoration: none;
+
+  &.goal-node {
+    width: 200px;
+    height: 80%;
+  }
+  &.task-node {
+    width: 80%;
+    height: 80%;
+  }
+}

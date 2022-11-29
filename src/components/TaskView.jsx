@@ -1,6 +1,7 @@
 import React from 'react';
 import { NavLink, useParams } from 'react-router-dom';
 import treeHelper from '../utility/treeHelper';
+import Node from './Node';
 import './TaskView.scss';
 
 const TaskView = ({ tree }) => {
@@ -79,19 +80,31 @@ const TaskView = ({ tree }) => {
       ) : (
         <div className="right-arrow">&gt;</div>
       )}
-      <div id="content">{family.currentNode.name}</div>
-      <div id="children">
-        {family.children.map((child) => {
-          return (
-            <NavLink
-              to={`/task/${child.id}`}
-              className="child-task"
-              key={child.id}
-            >
-              {child.name}
-            </NavLink>
-          );
-        })}
+      <div id="content">
+        {/* <div id="current-node">{family.currentNode.name}</div>
+        <div id="children">
+          {family.children.map((child) => {
+            return (
+              <NavLink
+                to={`/task/${child.id}`}
+                className="child-task"
+                key={child.id}
+              >
+                {child.name}
+              </NavLink>
+            );
+          })}
+        </div> */}
+        <Node
+          node={family.currentNode}
+          isGoal={parent ? false : true}
+          key={family.currentNode.id}
+        />
+        <div id="children">
+          {family.children.map((child) => {
+            return <Node node={child} isGoal={false} key={child.id} />;
+          })}
+        </div>
       </div>
     </div>
   );
