@@ -1,5 +1,6 @@
 import React from 'react';
 import { NavLink, useParams } from 'react-router-dom';
+import useRect from '../hooks/useRect';
 import treeHelper from '../utility/treeHelper';
 import Node from './Node';
 import './TaskView.scss';
@@ -15,49 +16,8 @@ const TaskView = ({ tree }) => {
   // } = treeHelper.findFamilyByIdBFS(tree, id);
   const family = treeHelper.findFamilyByIdBFS(tree, id);
   const isGoal = family.parent ? false : true;
-
-  // const relativeParent = {
-  //   position: 'relative',
-  //   height: '100%',
-  //   width: '100%'
-  // };
-
-  // const absoluteLeft = {
-  //   display: 'flex',
-  //   justifyContent: 'center',
-  //   alignItems: 'center',
-  //   position: 'absolute',
-  //   left: '0.5em',
-  //   top: '50%',
-  //   transform: 'translateX(-50%)',
-  //   height: '3em',
-  //   width: '1em'
-  // };
-
-  // const absoluteRight = {
-  //   display: 'flex',
-  //   justifyContent: 'center',
-  //   alignItems: 'center',
-  //   position: 'absolute',
-  //   right: '0px',
-  //   top: '50%',
-  //   transform: 'translateY(-50%)',
-  //   height: '3em',
-  //   width: '1em'
-  // };
-
-  // const absoluteTop = {
-  //   display: 'flex',
-  //   justifyContent: 'center',
-  //   alignItems: 'center',
-  //   position: 'absolute',
-  //   top: '0.5em',
-  //   left: '50%',
-  //   transform: 'translateY(-50%)',
-  //   width: '3em',
-  //   height: '1em'
-  // };
-  console.log(family);
+  const [currentNodeRect, currentNodeRef] = useRect();
+  console.log(currentNodeRect);
 
   return (
     <div id="task-view-container">
@@ -102,6 +62,7 @@ const TaskView = ({ tree }) => {
             node={family.currentNode}
             isGoal={isGoal}
             key={family.currentNode.id}
+            ref={currentNodeRef}
           />
         </div>
         <div id="children">

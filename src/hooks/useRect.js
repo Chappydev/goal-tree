@@ -12,7 +12,7 @@ const useRect = () => {
     const newRect = {};
 
     for (const property in box) {
-      newRect.property = box.property;
+      newRect[property] = box[property];
     }
 
     newRect.xCenter = xCenter;
