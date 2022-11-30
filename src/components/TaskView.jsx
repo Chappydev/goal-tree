@@ -17,7 +17,12 @@ const TaskView = ({ tree }) => {
   const family = treeHelper.findFamilyByIdBFS(tree, id);
   const isGoal = family.parent ? false : true;
   const [currentNodeRect, currentNodeRef] = useRect();
+  let childrenRects = [];
+  if (family.children) {
+    childrenRects = family.children.map((child) => useRect());
+  }
   console.log(currentNodeRect);
+  console.log(childrenRects);
 
   return (
     <div id="task-view-container">
@@ -66,8 +71,31 @@ const TaskView = ({ tree }) => {
           />
         </div>
         <div id="children">
-          {family.children.map((child) => {
-            return <Node node={child} isGoal={false} key={child.id} />;
+          {family.children.map((child, index) => {
+            const [childRect, childRef] = childrenRects[index];
+            return (
+              <>
+                <Node
+                  node={child}
+                  isGoal={false}
+                  key={child.id}
+                  ref={childRef}
+                />
+                <svg className="tree-line-svg">
+                  {/* 
+                    TODO: change styles to taste
+                    TODO: figure out animations for the styles as well 
+                  */}
+                  <line
+                    x1={currentNodeRect.xCenter}
+                    y1={currentNodeRect.yCenter}
+                    x2={childRect.xCenter}
+                    y2={childRect.yCenter}
+                    className="tree-line"
+                  />
+                </svg>
+              </>
+            );
           })}
         </div>
       </div>

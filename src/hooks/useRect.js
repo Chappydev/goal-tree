@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useLayoutEffect } from 'react';
 
 const useRect = () => {
   const ref = useRef();
@@ -22,7 +22,7 @@ const useRect = () => {
   };
 
   const useEffectInEvent = (event, useCapture) => {
-    useEffect(() => {
+    useLayoutEffect(() => {
       set();
       window.addEventListener(event, set, useCapture);
       return () => window.removeEventListener(event, set, useCapture);

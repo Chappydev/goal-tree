@@ -18,7 +18,6 @@ const TreeNodeAbsolute = ({
   // to appropriately fit the space given for the tree.
 
   const [rect, ref] = useRect();
-  console.log(rect);
 
   return (
     <div className="tree-node-wrapper">
