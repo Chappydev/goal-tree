@@ -1,8 +1,7 @@
 import React from 'react';
 import './TreeNode.scss';
-import useRect from '../hooks/useRect';
-import { NavLink } from 'react-router-dom';
 import Node from './Node';
+import { useState } from 'react';
 
 const TreeNodeAbsolute = ({
   node,
@@ -17,7 +16,7 @@ const TreeNodeAbsolute = ({
   // Alternatively, make one 'image' and then resize the WHOLE IMAGE to
   // to appropriately fit the space given for the tree.
 
-  const [rect, ref] = useRect();
+  const [rect, setRect] = useState();
 
   return (
     <div className="tree-node-wrapper">
@@ -31,23 +30,13 @@ const TreeNodeAbsolute = ({
             {node.name}
           </NavLink>
         )} */}
-        <Node node={node} isFirst={isGoal} key={node.id} ref={ref}>
-          {parentRect ? (
-            <svg className="tree-line-svg">
-              {/* 
-                TODO: change styles to taste
-                TODO: figure out animations for the styles as well 
-              */}
-              <line
-                x1={parentRect.xCenter}
-                y1={parentRect.yCenter}
-                x2={rect.xCenter}
-                y2={rect.yCenter}
-                className="tree-line"
-              />
-            </svg>
-          ) : null}
-        </Node>
+        <Node
+          node={node}
+          isFirst={isGoal}
+          parentRect={parentRect}
+          setRect={setRect}
+          key={node.id}
+        />
       </div>
       {node.children ? (
         <div className="tree-children-wrapper">
@@ -57,7 +46,7 @@ const TreeNodeAbsolute = ({
               <TreeNodeAbsolute
                 key={child.name}
                 node={child}
-                isFirst={false}
+                isGoal={false}
                 // TODO: change the value passed based on calculations
                 dimensions={dimensions}
                 parentRect={rect}
