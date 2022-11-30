@@ -10,12 +10,31 @@
   border-radius: 20px;
   text-decoration: none;
 
-  &.goal-node {
+  &.first-node {
     width: 200px;
     height: min(80%, 80px);
   }
-  &.task-node {
+  &.child-node {
     width: min(80%, 80px);
     height: min(80%, 80px);
   }
+
+  .inner-link {
+    color: inherit;
+  }
+}
+
+.tree-line-svg {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  overflow: visible;
+  z-index: -1;
+}
+
+.tree-line {
+  stroke: TreeNode.$box-bgcolor;
+  stroke-width: 2;
 }

@@ -1,6 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { NavLink, useParams } from 'react-router-dom';
-import useRect from '../hooks/useRect';
 import treeHelper from '../utility/treeHelper';
 import Node from './Node';
 import './TaskView.scss';
@@ -15,14 +14,7 @@ const TaskView = ({ tree }) => {
   //   children
   // } = treeHelper.findFamilyByIdBFS(tree, id);
   const family = treeHelper.findFamilyByIdBFS(tree, id);
-  const isGoal = family.parent ? false : true;
-  const [currentNodeRect, currentNodeRef] = useRect();
-  let childrenRects = [];
-  if (family.children) {
-    childrenRects = family.children.map((child) => useRect());
-  }
-  console.log(currentNodeRect);
-  console.log(childrenRects);
+  const [rect, setRect] = useState(null);
 
   return (
     <div id="task-view-container">
@@ -65,36 +57,20 @@ const TaskView = ({ tree }) => {
         <div id="current-node">
           <Node
             node={family.currentNode}
-            isGoal={isGoal}
+            isFirst={true}
+            setRect={setRect}
             key={family.currentNode.id}
-            ref={currentNodeRef}
           />
         </div>
         <div id="children">
           {family.children.map((child, index) => {
-            const [childRect, childRef] = childrenRects[index];
             return (
-              <>
-                <Node
-                  node={child}
-                  isGoal={false}
-                  key={child.id}
-                  ref={childRef}
-                />
-                <svg className="tree-line-svg">
-                  {/* 
-                    TODO: change styles to taste
-                    TODO: figure out animations for the styles as well 
-                  */}
-                  <line
-                    x1={currentNodeRect.xCenter}
-                    y1={currentNodeRect.yCenter}
-                    x2={childRect.xCenter}
-                    y2={childRect.yCenter}
-                    className="tree-line"
-                  />
-                </svg>
-              </>
+              <Node
+                node={child}
+                isFirst={false}
+                parentRect={rect}
+                key={child.id}
+              />
             );
           })}
         </div>

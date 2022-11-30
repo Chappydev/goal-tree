@@ -21,21 +21,6 @@ const TreeNodeAbsolute = ({
 
   return (
     <div className="tree-node-wrapper">
-      {parentRect ? (
-        <svg className="tree-line-svg">
-          {/* 
-            TODO: change styles to taste
-            TODO: figure out animations for the styles as well 
-          */}
-          <line
-            x1={parentRect.xCenter}
-            y1={parentRect.yCenter}
-            x2={rect.xCenter}
-            y2={rect.yCenter}
-            className="tree-line"
-          />
-        </svg>
-      ) : null}
       <div className="tree-node">
         {/* {isGoal ? (
           <NavLink to={`/task/${node.id}`} className="node-inner-box goal-node">
@@ -46,7 +31,23 @@ const TreeNodeAbsolute = ({
             {node.name}
           </NavLink>
         )} */}
-        <Node node={node} isGoal={isGoal} key={node.id} ref={ref} />
+        <Node node={node} isFirst={isGoal} key={node.id} ref={ref}>
+          {parentRect ? (
+            <svg className="tree-line-svg">
+              {/* 
+                TODO: change styles to taste
+                TODO: figure out animations for the styles as well 
+              */}
+              <line
+                x1={parentRect.xCenter}
+                y1={parentRect.yCenter}
+                x2={rect.xCenter}
+                y2={rect.yCenter}
+                className="tree-line"
+              />
+            </svg>
+          ) : null}
+        </Node>
       </div>
       {node.children ? (
         <div className="tree-children-wrapper">
@@ -56,7 +57,7 @@ const TreeNodeAbsolute = ({
               <TreeNodeAbsolute
                 key={child.name}
                 node={child}
-                isGoal={false}
+                isFirst={false}
                 // TODO: change the value passed based on calculations
                 dimensions={dimensions}
                 parentRect={rect}
