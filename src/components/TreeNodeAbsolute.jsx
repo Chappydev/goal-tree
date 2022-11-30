@@ -2,6 +2,7 @@ import React from 'react';
 import './TreeNode.scss';
 import useRect from '../hooks/useRect';
 import { NavLink } from 'react-router-dom';
+import Node from './Node';
 
 const TreeNodeAbsolute = ({
   node,
@@ -17,6 +18,7 @@ const TreeNodeAbsolute = ({
   // to appropriately fit the space given for the tree.
 
   const [rect, ref] = useRect();
+  console.log(rect);
 
   return (
     <div className="tree-node-wrapper">

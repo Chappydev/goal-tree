@@ -32,6 +32,7 @@ $box-color: white;
 .tree-node {
   display: flex;
   justify-content: center;
+  align-items: center;
   height: calc($row-height);
 }
 
