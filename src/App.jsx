@@ -10,10 +10,12 @@ const queryClient = new QueryClient();
 const testTreeData = {
   id: 1,
   name: 'Eat more',
+  isComplete: false,
   children: [
     {
       id: 2,
       name: 'Eat Chicken',
+      isComplete: false,
       children: [
         {
           id: 10,
@@ -25,18 +27,22 @@ const testTreeData = {
     {
       id: 3,
       name: 'Eat While Doing other things',
+      isComplete: false,
       children: [
         {
           id: 4,
           name: 'Eat while doing chores',
+          isComplete: false,
           children: [
             {
               id: 5,
               name: 'Eat while walking the dog',
+              isComplete: true,
               children: [
                 {
                   id: 6,
                   name: 'test',
+                  isComplete: true,
                   children: []
                 }
               ]
@@ -44,6 +50,7 @@ const testTreeData = {
             {
               id: 7,
               name: 'Eat while making dinner',
+              isComplete: false,
               children: []
             }
           ]
@@ -51,10 +58,12 @@ const testTreeData = {
         {
           id: 8,
           name: 'Eat while doing backflips',
+          isComplete: false,
           children: [
             {
               id: 11,
               name: "Don't choke",
+              isComplete: false,
               children: []
             }
           ]
@@ -62,6 +71,7 @@ const testTreeData = {
         {
           id: 9,
           name: 'Eat while singing',
+          isComplete: false,
           children: []
         }
       ]

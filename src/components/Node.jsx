@@ -1,6 +1,8 @@
 import React from 'react';
+import { useState } from 'react';
 import { useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
+import useAnimation from '../hooks/useAnimation';
 import useRect from '../hooks/useRect';
 import Line from './Line';
 import './Node.scss';
@@ -12,13 +14,26 @@ const Node = ({
   setRect = null,
   children
 }) => {
+  const [sizeObj, setSizeObj] = useState({});
+  const colorAnimation = useAnimation('linear', 1000, 0);
+
   const [rect, currNodeRef] = useRect();
   useEffect(() => {
     if (setRect) {
       setRect(rect);
     }
   }, [rect]);
-  console.log(rect, currNodeRef);
+
+  useEffect(() => {
+    if (node.isComplete) {
+      setSizeObj({
+        width: `${colorAnimation * 102}%`,
+        height: `${colorAnimation * 102}%`
+      });
+    } else {
+      setSizeObj({ width: '0%', height: '0%' });
+    }
+  }, [node.isComplete, colorAnimation]);
 
   if (isFirst) {
     return (
@@ -27,7 +42,10 @@ const Node = ({
         className="first-node node"
         ref={currNodeRef}
       >
-        {node.name}
+        <div className="hidden-relative-box">
+          <div className="complete-color" style={sizeObj}></div>
+          {node.name}
+        </div>
       </NavLink>
     );
   }
@@ -37,7 +55,10 @@ const Node = ({
       className="child-node node"
       ref={currNodeRef}
     >
-      {node.name}
+      <div className="hidden-relative-box">
+        <div className="complete-color" style={sizeObj}></div>
+        {node.name}
+      </div>
       {currNodeRef &&
       currNodeRef.current &&
       parentRect &&
@@ -47,6 +68,7 @@ const Node = ({
           y1={parentRect.yCenter}
           x2={rect.xCenter}
           y2={rect.yCenter}
+          isComplete={node.isComplete}
         />
       ) : null}
     </NavLink>

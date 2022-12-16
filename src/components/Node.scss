@@ -1,13 +1,16 @@
-@use './TreeNode';
+$box-bgcolor: #ff0000;
+$box-bgcolor-comp: #00d200;
+$box-color: white;
+$node-bradius: 20px;
 
 .node {
   display: flex;
   flex-direction: column;
   justify-content: center;
   text-align: center;
-  background-color: TreeNode.$box-bgcolor;
-  color: TreeNode.$box-color;
-  border-radius: 20px;
+  background-color: $box-bgcolor;
+  color: $box-color;
+  border-radius: $node-bradius;
   text-decoration: none;
 
   &.first-node {
@@ -19,8 +22,40 @@
     height: min(80%, 80px);
   }
 
+  // &.complete {
+  //   ::after {
+  //     content: '';
+  //     position: absolute;
+  //     left: 0;
+  //     right: 0;
+  //     top: 0;
+  //     bottom: 0;
+  //     background-color: $box-bgcolor-comp;
+  //   }
+  // }
+
   .inner-link {
     color: inherit;
+  }
+
+  .hidden-relative-box {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 0;
+    .complete-color {
+      position: absolute;
+      // left: -1px;
+      // right: -1px;
+      // top: -1px;
+      // bottom: -1px;
+      background-color: $box-bgcolor-comp;
+      border-radius: $node-bradius;
+      z-index: -1;
+    }
   }
 }
 
@@ -31,10 +66,33 @@
   top: 0;
   bottom: 0;
   overflow: visible;
-  z-index: -1;
+  z-index: -2;
 }
 
-.tree-line {
-  stroke: TreeNode.$box-bgcolor;
-  stroke-width: 2;
+// .tree-line {
+//   stroke: $box-bgcolor;
+//   stroke-width: 2;
+//   &.complete {
+//     animation: 2s ease 0s 1 normal forwards complete-line;
+//   }
+// }
+
+@keyframes complete-line {
+  0% {
+    stroke: $box-bgcolor;
+  }
+
+  100% {
+    stroke: $box-bgcolor-comp;
+  }
+}
+
+@keyframes complete-node {
+  0% {
+    background-color: $box-bgcolor;
+  }
+
+  100% {
+    background-color: $box-bgcolor-comp;
+  }
 }
