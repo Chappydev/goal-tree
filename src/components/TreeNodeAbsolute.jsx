@@ -7,6 +7,8 @@ const TreeNodeAbsolute = ({
   node,
   isGoal = true,
   dimensions,
+  treeDepth = 1,
+  currDepth = 1,
   parentRect = null
 }) => {
   // IDEA: Use the dimensions to calculate the dimensions for the node
@@ -35,6 +37,7 @@ const TreeNodeAbsolute = ({
           isFirst={isGoal}
           parentRect={parentRect}
           setRect={setRect}
+          delayMult={2 * (treeDepth - currDepth)}
           key={node.id}
         />
       </div>
@@ -47,9 +50,10 @@ const TreeNodeAbsolute = ({
                 key={child.name}
                 node={child}
                 isGoal={false}
-                // TODO: change the value passed based on calculations
                 dimensions={dimensions}
                 parentRect={rect}
+                treeDepth={treeDepth}
+                currDepth={currDepth + 1}
               />
             );
           })}

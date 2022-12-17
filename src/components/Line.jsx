@@ -3,9 +3,9 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import useAnimation from '../hooks/useAnimation';
 
-const Line = ({ x1, y1, x2, y2, isComplete }) => {
+const Line = ({ x1, y1, x2, y2, delayMult = 1, isComplete }) => {
   const [offsetObj, setOffsetObj] = useState({});
-  const animation1 = useAnimation('linear', 1000, 0);
+  const animation1 = useAnimation('linear', 1000, delayMult * 1000);
 
   const gradientId = `${Math.floor(x1)}${Math.floor(x2)}${Math.floor(
     y1
@@ -22,6 +22,13 @@ const Line = ({ x1, y1, x2, y2, isComplete }) => {
     x1 > x2
       ? {
           x1: '100%',
+          y1: '0%',
+          x2: '0%',
+          y2: '100%'
+        }
+      : x1 === x2
+      ? {
+          x1: '0%',
           y1: '0%',
           x2: '0%',
           y2: '100%'

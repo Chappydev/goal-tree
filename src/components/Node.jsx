@@ -12,10 +12,11 @@ const Node = ({
   isFirst,
   parentRect = null,
   setRect = null,
+  delayMult = 0,
   children
 }) => {
   const [sizeObj, setSizeObj] = useState({});
-  const colorAnimation = useAnimation('linear', 1000, 0);
+  const colorAnimation = useAnimation('linear', 1000, delayMult * 1000);
 
   const [rect, currNodeRef] = useRect();
   useEffect(() => {
@@ -68,6 +69,7 @@ const Node = ({
           y1={parentRect.yCenter}
           x2={rect.xCenter}
           y2={rect.yCenter}
+          delayMult={delayMult + 1}
           isComplete={node.isComplete}
         />
       ) : null}

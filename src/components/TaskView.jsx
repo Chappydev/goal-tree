@@ -59,6 +59,7 @@ const TaskView = ({ tree }) => {
             node={family.currentNode}
             isFirst={true}
             setRect={setRect}
+            delayMult={2}
             key={family.currentNode.id}
           />
         </div>
@@ -69,6 +70,7 @@ const TaskView = ({ tree }) => {
                 node={child}
                 isFirst={false}
                 parentRect={rect}
+                delayMult={0}
                 key={child.id}
               />
             );
