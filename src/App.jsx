@@ -32,7 +32,7 @@ const testTreeData = {
         {
           id: 4,
           name: 'Eat while doing chores',
-          isComplete: false,
+          isComplete: true,
           children: [
             {
               id: 5,
@@ -50,7 +50,7 @@ const testTreeData = {
             {
               id: 7,
               name: 'Eat while making dinner',
-              isComplete: false,
+              isComplete: true,
               children: []
             }
           ]
