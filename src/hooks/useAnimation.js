@@ -13,11 +13,23 @@ function useAnimation(easingName = 'linear', duration = 500, delay = 0) {
 // Some easing functions copied from:
 // https://github.com/streamich/ts-easing/blob/master/src/index.ts
 // Hardcode here or pull in a dependency
+// Added from:
+// https://spicyyoghurt.com/tools/easing-functions
 const easing = {
   linear: (n) => n,
   elastic: (n) =>
     n * (33 * n * n * n * n - 106 * n * n * n + 126 * n * n - 67 * n + 15),
-  inExpo: (n) => Math.pow(2, 10 * (n - 1))
+  inExpo: (n) => Math.pow(2, 10 * (n - 1)),
+  easeInOutQuad: (n) => {
+    if ((n /= 1 / 2) < 1) return (1 / 2) * n * n;
+    return (-1 / 2) * (--n * (n - 2) - 1);
+  },
+  easeInOutExpo: (t) => {
+    if (t == 0) return 0;
+    if (t == 1) return 1;
+    if ((t /= 1 / 2) < 1) return (1 / 2) * Math.pow(2, 10 * (t - 1));
+    return (1 / 2) * (-Math.pow(2, -10 * --t) + 2);
+  }
 };
 function useAnimationTimer(duration = 1000, delay = 0) {
   const [elapsed, setTime] = useState(0);
