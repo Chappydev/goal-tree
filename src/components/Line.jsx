@@ -5,7 +5,7 @@ import useAnimation from '../hooks/useAnimation';
 
 const Line = ({ x1, y1, x2, y2, delayMult = 1, isComplete }) => {
   const [offsetObj, setOffsetObj] = useState({});
-  const animation1 = useAnimation('easeInOutQuad', 1000, delayMult * 1000);
+  const animation1 = useAnimation('easeInOutQuad', 500, delayMult * 1000 - 400);
 
   const gradientId = `${Math.floor(x1)}${Math.floor(x2)}${Math.floor(
     y1

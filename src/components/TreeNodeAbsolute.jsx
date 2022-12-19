@@ -37,7 +37,7 @@ const TreeNodeAbsolute = ({
           isFirst={isGoal}
           parentRect={parentRect}
           setRect={setRect}
-          delayMult={2 * (treeDepth - currDepth)}
+          delayMult={1.5 * (treeDepth - currDepth)}
           key={node.id}
         />
       </div>

@@ -16,7 +16,8 @@ const Node = ({
   children
 }) => {
   const [sizeObj, setSizeObj] = useState({});
-  const colorAnimation = useAnimation('easeInOutExpo', 1000, delayMult * 1000);
+  const delay = delayMult * 1000 - 300 < 0 ? 0 : delayMult * 1000 - 300;
+  const colorAnimation = useAnimation('easeInOutExpo', 1000, delay);
 
   const [rect, currNodeRef] = useRect();
   useEffect(() => {
