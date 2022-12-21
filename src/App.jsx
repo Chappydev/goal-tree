@@ -1,9 +1,11 @@
 import React from 'react';
-import { QueryClient, QueryClientProvider } from 'react-query';
+import { QueryClient, QueryClientProvider, useQuery } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
+import queryFunctions from './utility/queryFunctions';
 import { Route, Routes } from 'react-router-dom';
 import TaskView from './components/TaskView';
 import Tree from './components/Tree';
+import QueryComp from './components/QueryComp';
 
 const queryClient = new QueryClient();
 
@@ -93,17 +95,10 @@ const fillWindow = {
 };
 
 function App() {
-  console.log(testTreeData);
   return (
     <QueryClientProvider client={queryClient}>
       <div className="App" style={fillWindow}>
-        {/* <Tree data={testTreeData} /> */}
-        {/* <TaskView /> */}
-
-        <Routes>
-          <Route path="/tree" element={<Tree data={testTreeData} />} />
-          <Route path="/task/:id" element={<TaskView tree={testTreeData} />} />
-        </Routes>
+        <QueryComp />
       </div>
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
