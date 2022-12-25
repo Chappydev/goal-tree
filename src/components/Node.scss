@@ -5,8 +5,8 @@ $options-background: #00000044;
 $node-bradius: 20px;
 
 .node-container {
-  display: flex;
-  justify-content: start;
+  display: inline-block;
+  z-index: 0;
 
   &.first-node {
     width: 200px;
@@ -18,20 +18,24 @@ $node-bradius: 20px;
   }
 }
 
+.node-container:hover {
+  .node-options {
+    display: flex;
+    transform: translateX(-28px);
+  }
+}
+
 .node-options {
   display: flex;
   flex-direction: column;
   background-color: $options-background;
-  position: fixed;
+  position: absolute;
   width: 50px;
   height: 80px;
   border-top-left-radius: $node-bradius;
   border-bottom-left-radius: $node-bradius;
-  z-index: -1;
+  z-index: 0;
   transition: transform 200ms ease-out;
-  &.display {
-    transform: translateX(-28px);
-  }
 
   .option {
     flex: auto;
@@ -42,12 +46,15 @@ $node-bradius: 20px;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  position: relative;
   text-align: center;
   width: 100%;
+  height: 100%;
   background-color: $box-bgcolor;
   color: $box-color;
   border-radius: $node-bradius;
   text-decoration: none;
+  z-index: 1;
 
   .inner-link {
     color: inherit;
@@ -60,7 +67,7 @@ $node-bradius: 20px;
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 0;
+    z-index: 1;
     .complete-color {
       position: absolute;
       background-color: $box-bgcolor-comp;
@@ -71,11 +78,12 @@ $node-bradius: 20px;
 }
 
 .tree-line-svg {
-  position: absolute;
+  position: fixed;
   left: 0;
   right: 0;
   top: 0;
   bottom: 0;
   overflow: visible;
-  z-index: -2;
+  pointer-events: none;
+  z-index: 0;
 }

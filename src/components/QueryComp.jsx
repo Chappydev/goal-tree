@@ -19,7 +19,6 @@ const QueryComp = () => {
     return <div>{`Error: ${error.message}`}</div>;
   }
 
-  console.log(data);
   return (
     <Routes>
       <Route path="/tree" element={<Tree data={data} />} />

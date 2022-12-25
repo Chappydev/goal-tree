@@ -81,7 +81,7 @@ const Line = ({ x1, y1, x2, y2, delayMult = 1, isComplete }) => {
           y={y1}
           width="2"
           height={svgHeight}
-          className={`tree-line${isComplete ? ' complete' : ''}`}
+          className={'tree-line'}
           fill={`url(#${gradientId})`}
         />
       ) : (
@@ -90,7 +90,7 @@ const Line = ({ x1, y1, x2, y2, delayMult = 1, isComplete }) => {
           y1={y1}
           x2={x2}
           y2={y2}
-          className={`tree-line${isComplete ? ' complete' : ''}`}
+          className={'tree-line'}
           stroke={`url(#${gradientId})`}
           strokeWidth="2"
         />

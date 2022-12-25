@@ -52,16 +52,12 @@ const Node = ({
     );
   }
   return (
-    <div
-      className="child-node node-container"
-      onMouseOver={() => setIsShown(true)}
-      onMouseLeave={() => setIsShown(false)}
-    >
+    <div className="child-node node-container">
       {/* 
         TODO: Keep options shade from closing when hovering
               over it.
       */}
-      <div className={`node-options${isShown ? ' display' : ''}`}>
+      <div className="node-options">
         <Check className="check option" />
         <Edit3 className="edit option" />
         <X className="x option" />
