@@ -4,7 +4,7 @@ import treeHelper from '../utility/treeHelper';
 import Node from './Node';
 import './TaskView.scss';
 
-const TaskView = ({ tree }) => {
+const TaskView = ({ tree, mutations }) => {
   const id = useParams().id;
   // const {
   //   parent,
@@ -61,6 +61,7 @@ const TaskView = ({ tree }) => {
             setRect={setRect}
             delayMult={1.5}
             key={family.currentNode.id}
+            mutations={mutations}
           />
         </div>
         <div id="children">
@@ -72,6 +73,7 @@ const TaskView = ({ tree }) => {
                 parentRect={rect}
                 delayMult={0}
                 key={child.id}
+                mutations={mutations}
               />
             );
           })}

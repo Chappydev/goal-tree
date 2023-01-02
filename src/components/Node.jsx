@@ -13,10 +13,10 @@ const Node = ({
   isFirst,
   parentRect = null,
   setRect = null,
-  delayMult = 0
+  delayMult = 0,
+  mutations
 }) => {
   const [sizeObj, setSizeObj] = useState({});
-  const [isShown, setIsShown] = useState(false);
   const delay = delayMult * 1000 - 300 < 0 ? 0 : delayMult * 1000 - 300;
   const colorAnimation = useAnimation('easeInOutExpo', 1000, delay);
 
@@ -58,7 +58,10 @@ const Node = ({
               over it.
       */}
       <div className="node-options">
-        <Check className="check option" />
+        <Check
+          className="check option"
+          onClick={() => mutations.toggleComplete.mutate(node)}
+        />
         <Edit3 className="edit option" />
         <X className="x option" />
       </div>

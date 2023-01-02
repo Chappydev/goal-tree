@@ -4,7 +4,7 @@ import './Tree.scss';
 import TreeNodeAbsolute from './TreeNodeAbsolute';
 import treeHelper from '../utility/treeHelper';
 
-const Tree = ({ data }) => {
+const Tree = ({ data, mutations }) => {
   const dimensions = useDimensions();
   const treeDepth = treeHelper.findDeepestLayer(data);
   console.log('Depth: ' + treeDepth);
@@ -23,6 +23,7 @@ const Tree = ({ data }) => {
         dimensions={dimensions}
         treeDepth={treeDepth}
         currDepth={1}
+        mutations={mutations}
       />
     </div>
   );

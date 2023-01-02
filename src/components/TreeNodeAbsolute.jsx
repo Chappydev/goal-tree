@@ -9,7 +9,8 @@ const TreeNodeAbsolute = ({
   dimensions,
   treeDepth = 1,
   currDepth = 1,
-  parentRect = null
+  parentRect = null,
+  mutations
 }) => {
   // IDEA: Use the dimensions to calculate the dimensions for the node
   // and the children nodes. Also use the data to determine how many
@@ -39,6 +40,7 @@ const TreeNodeAbsolute = ({
           setRect={setRect}
           delayMult={1.5 * (treeDepth - currDepth)}
           key={node.id}
+          mutations={mutations}
         />
       </div>
       {node.children ? (
@@ -54,6 +56,7 @@ const TreeNodeAbsolute = ({
                 parentRect={rect}
                 treeDepth={treeDepth}
                 currDepth={currDepth + 1}
+                mutations={mutations}
               />
             );
           })}
