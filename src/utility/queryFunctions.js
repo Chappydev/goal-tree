@@ -1,20 +1,11 @@
-import treeHelper from './treeHelper';
-
-const baseUrl = 'http://localhost:3000/';
+const baseUrl = 'http://localhost:3001/api/';
 
 const findGoal = async () => {
-  const goalResponse = await fetch(baseUrl + 'goals/0/');
-  if (!goalResponse.ok) {
-    throw new Error(goalResponse);
+  const response = await fetch(baseUrl + 'goals/0/');
+  if (!response.ok) {
+    throw new Error(response);
   }
-  const goalData = await goalResponse.json();
-  const nodesResponse = await fetch(baseUrl + 'nodes/');
-  if (!nodesResponse.ok) {
-    throw new Error(nodesResponse);
-  }
-  const nodesData = await nodesResponse.json();
-  const data = { ...goalData, nodes: [...nodesData] };
-  return treeHelper.buildTree(data);
+  return await response.json();
 };
 
 const updateNode = async (newNode) => {

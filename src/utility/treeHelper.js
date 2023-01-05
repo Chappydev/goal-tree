@@ -164,7 +164,6 @@ const findFamilyByIdBFS = (tree, id) => {
 };
 
 const replaceChildIdWithNode = (node, nodeList) => {
-  console.log(node);
   if (node.children.length < 1) {
     return node;
   }
