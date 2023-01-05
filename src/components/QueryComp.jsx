@@ -2,6 +2,7 @@ import React from 'react';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { Route, Routes } from 'react-router-dom';
 import queryFunctions from '../utility/queryFunctions';
+import CurrentView from './CurrentView';
 import TaskView from './TaskView';
 import Tree from './Tree';
 
@@ -49,6 +50,7 @@ const QueryComp = () => {
         path="/task/:id"
         element={<TaskView tree={data} mutations={mutations} />}
       />
+      <Route path="/goals" element={<CurrentView />} />
     </Routes>
   );
 };
