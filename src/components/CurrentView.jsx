@@ -1,5 +1,7 @@
 import React from 'react';
+import { useQuery } from 'react-query';
 import { NavLink } from 'react-router-dom';
+import queryFunctions from '../utility/queryFunctions';
 
 const testGoalData = [
   {
@@ -117,7 +119,20 @@ const testGoalData = [
 const testEmptyData = [];
 
 const CurrentView = () => {
-  if (testGoalData.length < 1) {
+  const { isLoading, error, data } = useQuery({
+    queryKey: ['goalsOverview'],
+    queryFn: queryFunctions.findOverview
+  });
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>{`Error: ${error.message}`}</div>;
+  }
+
+  if (data.length < 1) {
     return (
       <div>
         <p>You currently have no trees.</p>
@@ -128,9 +143,11 @@ const CurrentView = () => {
     );
   }
 
+  // This is broken currently
+  // TODO: Edit here or in server response to work again
   return (
     <div>
-      {testGoalData.map((goal) => {
+      {data.map((goal) => {
         return (
           <div key={goal.id}>
             <h2>{goal.tree.name}</h2>
