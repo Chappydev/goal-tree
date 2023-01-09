@@ -28,8 +28,28 @@ const QueryComp = () => {
     }
   });
 
+  const deleteNode = useMutation({
+    mutationFn: (currNode) => {
+      return queryFunctions.deleteNode(currNode);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['treeData'] });
+    }
+  });
+
+  const addNode = useMutation({
+    mutationFn: (name, parentId, insertInd) => {
+      return queryFunctions.insertNode(name, parentId, insertInd);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['treeData'] });
+    }
+  });
+
   const mutations = {
-    toggleComplete
+    toggleComplete,
+    deleteNode,
+    addNode
   };
 
   if (isLoading) {

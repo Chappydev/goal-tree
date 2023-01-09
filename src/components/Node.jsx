@@ -63,7 +63,10 @@ const Node = ({
           onClick={() => mutations.toggleComplete.mutate(node)}
         />
         <Edit3 className="edit option" />
-        <X className="x option" />
+        <X
+          className="x option"
+          onClick={() => mutations.deleteNode.mutate(node)}
+        />
       </div>
       <NavLink to={`/task/${node.id}`} className="node" ref={currNodeRef}>
         <div className="hidden-relative-box">
