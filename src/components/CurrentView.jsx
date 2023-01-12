@@ -143,17 +143,17 @@ const CurrentView = () => {
     );
   }
 
-  // This is broken currently
-  // TODO: Edit here or in server response to work again
   return (
     <div>
       {data.map((goal) => {
         return (
           <div key={goal.id}>
-            <h2>{goal.tree.name}</h2>
+            <h2>{goal.goalNode.name}</h2>
             <p>
-              Current:{' '}
-              <NavLink to={`/task/${goal.tree.id}`}>{goal.tree.name}</NavLink>
+              Current:
+              <NavLink to={`/task/${goal.incompleteNodes[0].id}`}>
+                {goal.incompleteNodes[0].name}
+              </NavLink>
             </p>
           </div>
         );
