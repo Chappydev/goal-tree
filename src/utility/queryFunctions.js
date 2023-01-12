@@ -11,7 +11,7 @@ const findGoal = async () => {
 
 // TODO: change so overview gives you data about ALL goals by default
 const findOverview = async () => {
-  const response = await fetch(baseUrl + 'goals/0/overview');
+  const response = await fetch(baseUrl + 'goals-overview');
   if (!response.ok) {
     throw new Error(response);
   }
