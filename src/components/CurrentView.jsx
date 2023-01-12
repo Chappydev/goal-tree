@@ -2,6 +2,7 @@ import React from 'react';
 import { useQuery } from 'react-query';
 import { NavLink } from 'react-router-dom';
 import queryFunctions from '../utility/queryFunctions';
+import GoalOverview from './GoalOverview';
 
 const testGoalData = [
   {
@@ -145,19 +146,9 @@ const CurrentView = () => {
 
   return (
     <div>
-      {data.map((goal) => {
-        return (
-          <div key={goal.id}>
-            <h2>{goal.goalNode.name}</h2>
-            <p>
-              Current:
-              <NavLink to={`/task/${goal.incompleteNodes[0].id}`}>
-                {goal.incompleteNodes[0].name}
-              </NavLink>
-            </p>
-          </div>
-        );
-      })}
+      {data.map((goalData) => (
+        <GoalOverview key={goalData.goalId} goalData={goalData} />
+      ))}
     </div>
   );
 };
