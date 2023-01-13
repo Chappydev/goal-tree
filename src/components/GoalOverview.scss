@@ -1,0 +1,19 @@
+.overview-container {
+  padding: 1em 2em;
+  border-bottom: 1px solid black;
+}
+
+.current-container {
+  display: flex;
+  align-items: center;
+}
+
+.arrows-container {
+  > * {
+    display: block;
+    height: auto;
+  }
+
+  height: 100%;
+  margin-left: auto;
+}
