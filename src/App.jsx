@@ -6,6 +6,7 @@ import { Route, Routes } from 'react-router-dom';
 import TaskView from './components/TaskView';
 import Tree from './components/Tree';
 import QueryComp from './components/QueryComp';
+import Navbar from './components/Navbar';
 
 const queryClient = new QueryClient();
 
@@ -98,6 +99,7 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <div className="App" style={fillWindow}>
+        <Navbar />
         <QueryComp />
       </div>
       <ReactQueryDevtools initialIsOpen={false} />
