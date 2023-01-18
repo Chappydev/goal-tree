@@ -3,6 +3,7 @@ import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { Route, Routes } from 'react-router-dom';
 import queryFunctions from '../utility/queryFunctions';
 import CurrentView from './CurrentView';
+import D3Tree from './D3Tree';
 import TaskView from './TaskView';
 import Tree from './Tree';
 
@@ -62,10 +63,7 @@ const QueryComp = () => {
 
   return (
     <Routes>
-      <Route
-        path="/tree"
-        element={<Tree data={data} mutations={mutations} />}
-      />
+      <Route path="/tree" element={<D3Tree data={data} />} />
       <Route
         path="/task/:id"
         element={<TaskView tree={data} mutations={mutations} />}
