@@ -12,7 +12,7 @@ const Line = ({ x1, y1, x2, y2, delayMult = 1, isComplete }) => {
   )}${Math.floor(y2)}-gradient`;
 
   const svgHeight = Math.abs(y2 - y1);
-  const svgWidth = Math.abs(x2 - x1);
+  const svgWidth = Math.round(Math.abs(x2 - x1));
   const svgStyle = {
     height: svgHeight,
     width: svgWidth || 1
@@ -75,7 +75,7 @@ const Line = ({ x1, y1, x2, y2, delayMult = 1, isComplete }) => {
         stroke={`url(#${gradientId})`}
         strokeWidth="2"
       /> */}
-      {svgWidth === 0 ? (
+      {svgWidth < 0.1 ? (
         <rect
           x={x1}
           y={y1}
