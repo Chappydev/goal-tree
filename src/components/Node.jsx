@@ -14,6 +14,7 @@ const Node = ({
   parentRect = null,
   setRect = null,
   delayMult = 0,
+  openModal = null,
   mutations
 }) => {
   const [sizeObj, setSizeObj] = useState({});
@@ -62,7 +63,7 @@ const Node = ({
           className="check option"
           onClick={() => mutations.toggleComplete.mutate(node)}
         />
-        <Edit3 className="edit option" />
+        <Edit3 className="edit option" onClick={() => openModal()} />
         <X
           className="x option"
           onClick={() => mutations.deleteNode.mutate(node)}

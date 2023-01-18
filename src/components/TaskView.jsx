@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { NavLink, useParams } from 'react-router-dom';
 import treeHelper from '../utility/treeHelper';
+import Modal from './Modal';
 import Node from './Node';
 import './TaskView.scss';
 
@@ -15,6 +16,15 @@ const TaskView = ({ tree, mutations }) => {
   // } = treeHelper.findFamilyByIdBFS(tree, id);
   const family = treeHelper.findFamilyByIdBFS(tree, id);
   const [rect, setRect] = useState(null);
+  const [isShown, setIsShown] = useState(false);
+
+  const openModal = () => {
+    setIsShown(true);
+  };
+
+  const closeModal = () => {
+    setIsShown(false);
+  };
 
   return (
     <div id="task-view-container">
@@ -60,6 +70,7 @@ const TaskView = ({ tree, mutations }) => {
             isFirst={true}
             setRect={setRect}
             delayMult={1.5}
+            openModal={openModal}
             key={family.currentNode.id}
             mutations={mutations}
           />
@@ -72,6 +83,7 @@ const TaskView = ({ tree, mutations }) => {
                 isFirst={false}
                 parentRect={rect}
                 delayMult={0}
+                openModal={openModal}
                 key={child.id}
                 mutations={mutations}
               />
@@ -79,6 +91,9 @@ const TaskView = ({ tree, mutations }) => {
           })}
         </div>
       </div>
+      <Modal handleClose={closeModal} isShown={isShown}>
+        <p>Here is a modal</p>
+      </Modal>
     </div>
   );
 };
