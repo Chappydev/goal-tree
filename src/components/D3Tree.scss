@@ -1,0 +1,9 @@
+@use 'Node';
+
+.node-circle {
+  fill: Node.$box-bgcolor;
+  stroke: none;
+  &.complete {
+    fill: Node.$box-bgcolor-comp;
+  }
+}
