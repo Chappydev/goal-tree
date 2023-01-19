@@ -9,6 +9,7 @@ const Modal = ({ handleClose, isShown, children }) => {
   return (
     <div className={className}>
       <section className="inner-modal">
+        <div>The top part</div>
         {children}
         <button type="button" onClick={handleClose}>
           Close
