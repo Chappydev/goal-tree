@@ -1,0 +1,17 @@
+@use './Modal.scss';
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: Modal.$spacing;
+}
+
+.form-buttons {
+  display: flex;
+  justify-content: end;
+  gap: Modal.$spacing;
+}
+
+.modal-button {
+  display: block;
+}
