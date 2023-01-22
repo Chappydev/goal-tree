@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { NavLink, useParams } from 'react-router-dom';
 import treeHelper from '../utility/treeHelper';
+import EditForm from './EditForm';
 import Modal from './Modal';
 import Node from './Node';
 import './TaskView.scss';
@@ -17,8 +18,10 @@ const TaskView = ({ tree, mutations }) => {
   const family = treeHelper.findFamilyByIdBFS(tree, id);
   const [rect, setRect] = useState(null);
   const [isShown, setIsShown] = useState(false);
+  const [formNode, setFormNode] = useState(null);
 
-  const openModal = () => {
+  const openModal = (node) => {
+    setFormNode(node);
     setIsShown(true);
   };
 
@@ -92,7 +95,7 @@ const TaskView = ({ tree, mutations }) => {
         </div>
       </div>
       <Modal handleClose={closeModal} isShown={isShown}>
-        <p>Here is a modal</p>
+        <EditForm node={formNode} handleClose={closeModal} />
       </Modal>
     </div>
   );

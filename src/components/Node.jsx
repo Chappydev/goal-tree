@@ -63,7 +63,7 @@ const Node = ({
           className="check option"
           onClick={() => mutations.toggleComplete.mutate(node)}
         />
-        <Edit3 className="edit option" onClick={() => openModal()} />
+        <Edit3 className="edit option" onClick={() => openModal(node)} />
         <X
           className="x option"
           onClick={() => mutations.deleteNode.mutate(node)}
