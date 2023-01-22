@@ -7,13 +7,13 @@ const Modal = ({ handleClose, isShown, children }) => {
     : 'modal-container display-none';
 
   return (
-    <div className={className}>
+    <div
+      className={className}
+      onClick={(e) => (e.target === e.currentTarget ? handleClose() : null)}
+    >
       <section className="inner-modal">
-        <div>The top part</div>
-        {children}
-        <button type="button" onClick={handleClose}>
-          Close
-        </button>
+        <div className="modal-top">The top part</div>
+        <div className="modal-content">{children}</div>
       </section>
     </div>
   );
