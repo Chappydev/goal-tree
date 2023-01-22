@@ -1,3 +1,6 @@
+$section-height: 30px;
+$spacing: 0.5em;
+
 .modal-container {
   position: fixed;
   top: 0;
@@ -19,11 +22,14 @@
 .inner-modal {
   position: fixed;
   display: grid;
-  grid-template-rows: 30px 1fr 30px;
+  grid-template-rows: $section-height 1fr;
+  gap: $spacing;
   background-color: rgba($color: #ffffff, $alpha: 1);
   width: 80%;
   max-height: 80%;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+
+  padding: $spacing;
 }
