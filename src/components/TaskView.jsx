@@ -1,33 +1,20 @@
 import React, { useState } from 'react';
 import { NavLink, useParams } from 'react-router-dom';
+import useModal from '../hooks/useModal';
 import treeHelper from '../utility/treeHelper';
 import EditForm from './EditForm';
 import Modal from './Modal';
+import NewNodeForm from './NewNodeForm';
 import Node from './Node';
 import './TaskView.scss';
 
 const TaskView = ({ tree, mutations }) => {
   const id = useParams().id;
-  // const {
-  //   parent,
-  //   currentNode: task,
-  //   prevSibling,
-  //   nextSibling,
-  //   children
-  // } = treeHelper.findFamilyByIdBFS(tree, id);
   const family = treeHelper.findFamilyByIdBFS(tree, id);
   const [rect, setRect] = useState(null);
-  const [isShown, setIsShown] = useState(false);
-  const [formNode, setFormNode] = useState(null);
-
-  const openModal = (node) => {
-    setFormNode(node);
-    setIsShown(true);
-  };
-
-  const closeModal = () => {
-    setIsShown(false);
-  };
+  const [editIsShown, editFormNode, editHandleOpen, editHandleClose] =
+    useModal();
+  const [addIsShown, addFormNode, addHandleOpen, addHandleClose] = useModal();
 
   return (
     <div id="task-view-container">
@@ -73,7 +60,8 @@ const TaskView = ({ tree, mutations }) => {
             isFirst={true}
             setRect={setRect}
             delayMult={1.5}
-            openModal={openModal}
+            editHandleOpen={editHandleOpen}
+            addHandleOpen={addHandleOpen}
             key={family.currentNode.id}
             mutations={mutations}
           />
@@ -86,7 +74,8 @@ const TaskView = ({ tree, mutations }) => {
                 isFirst={false}
                 parentRect={rect}
                 delayMult={0}
-                openModal={openModal}
+                editHandleOpen={editHandleOpen}
+                addHandleOpen={addHandleOpen}
                 key={child.id}
                 mutations={mutations}
               />
@@ -94,8 +83,11 @@ const TaskView = ({ tree, mutations }) => {
           })}
         </div>
       </div>
-      <Modal handleClose={closeModal} isShown={isShown}>
-        <EditForm node={formNode} handleClose={closeModal} />
+      <Modal handleClose={editHandleClose} isShown={editIsShown}>
+        <EditForm node={editFormNode} handleClose={editHandleClose} />
+      </Modal>
+      <Modal handleClose={addHandleClose} isShown={addIsShown}>
+        <NewNodeForm node={addFormNode} handleClose={addHandleClose} />
       </Modal>
     </div>
   );
