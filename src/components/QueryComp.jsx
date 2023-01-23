@@ -38,19 +38,9 @@ const QueryComp = () => {
     }
   });
 
-  const addNode = useMutation({
-    mutationFn: (name, parentId, insertInd) => {
-      return queryFunctions.insertNode(name, parentId, insertInd);
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['treeData'] });
-    }
-  });
-
   const mutations = {
     toggleComplete,
-    deleteNode,
-    addNode
+    deleteNode
   };
 
   if (isLoading) {
