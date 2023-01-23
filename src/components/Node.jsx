@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState } from 'react';
 import { useEffect } from 'react';
-import { Check, Edit3, X } from 'react-feather';
+import { Check, Edit3, Plus, X } from 'react-feather';
 import { NavLink } from 'react-router-dom';
 import useAnimation from '../hooks/useAnimation';
 import useRect from '../hooks/useRect';
@@ -14,7 +14,8 @@ const Node = ({
   parentRect = null,
   setRect = null,
   delayMult = 0,
-  openModal = null,
+  editHandleOpen = null,
+  addHandleOpen = null,
   mutations
 }) => {
   const [sizeObj, setSizeObj] = useState({});
@@ -39,10 +40,23 @@ const Node = ({
     }
   }, [node.isComplete, colorAnimation]);
 
-  // TODO: Add options shade to first-node
   if (isFirst) {
     return (
       <div className="first-node node-container">
+        <div className="node-options">
+          <Check
+            className="check option"
+            onClick={() => mutations.toggleComplete.mutate(node)}
+          />
+          <Edit3 className="edit option" onClick={() => editHandleOpen(node)} />
+          <X
+            className="x option"
+            onClick={() => mutations.deleteNode.mutate(node)}
+          />
+        </div>
+        <div className="plus-container">
+          <Plus className="plus option" onClick={() => addHandleOpen(node)} />
+        </div>
         <NavLink to={`/task/${node.id}`} className="node" ref={currNodeRef}>
           <div className="hidden-relative-box">
             <div className="complete-color" style={sizeObj}></div>
@@ -54,20 +68,19 @@ const Node = ({
   }
   return (
     <div className="child-node node-container">
-      {/* 
-        TODO: Keep options shade from closing when hovering
-              over it.
-      */}
       <div className="node-options">
         <Check
           className="check option"
           onClick={() => mutations.toggleComplete.mutate(node)}
         />
-        <Edit3 className="edit option" onClick={() => openModal(node)} />
+        <Edit3 className="edit option" onClick={() => editHandleOpen(node)} />
         <X
           className="x option"
           onClick={() => mutations.deleteNode.mutate(node)}
         />
+      </div>
+      <div className="plus-container">
+        <Plus className="plus option" onClick={() => addHandleOpen(node)} />
       </div>
       <NavLink to={`/task/${node.id}`} className="node" ref={currNodeRef}>
         <div className="hidden-relative-box">

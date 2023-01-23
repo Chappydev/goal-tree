@@ -3,18 +3,25 @@ $box-bgcolor-comp: #00d200;
 $box-color: white;
 $options-background: #00000044;
 $node-bradius: 20px;
+@mixin node-dimensions($child: true) {
+  height: 80px;
+
+  @if $child {
+    width: 80px;
+  } @else {
+    width: 200px;
+  }
+}
 
 .node-container {
   display: inline-block;
   z-index: 0;
 
   &.first-node {
-    width: 200px;
-    height: 80px;
+    @include node-dimensions($child: false);
   }
   &.child-node {
-    width: 80px;
-    height: 80px;
+    @include node-dimensions();
   }
 }
 
@@ -39,6 +46,37 @@ $node-bradius: 20px;
 
   .option {
     flex: auto;
+    cursor: pointer;
+  }
+}
+
+.plus-container {
+  position: absolute;
+  z-index: 0;
+}
+
+.first-node {
+  .plus-container {
+    @include node-dimensions($child: false);
+  }
+}
+
+.child-node {
+  .plus-container {
+    @include node-dimensions();
+  }
+}
+
+.option.plus {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translate(125%, -50%);
+  color: black;
+  opacity: 40%;
+  cursor: pointer;
+  &:hover {
+    opacity: 60%;
   }
 }
 
