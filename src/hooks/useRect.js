@@ -21,6 +21,15 @@ const useRect = () => {
     setRect(newRect);
   };
 
+  useLayoutEffect(() => {
+    if (
+      ref?.current?.getBoundingClientRect?.().x !== rect.x ||
+      ref?.current?.getBoundingClientRect?.().y !== rect.y
+    ) {
+      set();
+    }
+  }, [set, ref?.current?.getBoundingClientRect?.()]);
+
   const useEffectInEvent = (event, useCapture) => {
     useLayoutEffect(() => {
       set();
