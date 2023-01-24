@@ -9,6 +9,23 @@ const findGoal = async () => {
   return await response.json();
 };
 
+const createGoal = async (name) => {
+  const body = JSON.stringify({
+    name
+  });
+  const response = await fetch(baseUrl + 'goals/', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body
+  });
+  if (!response.ok) {
+    throw new Error(response.error);
+  }
+  return await response.json();
+};
+
 // TODO: change so overview gives you data about ALL goals by default
 const findOverview = async () => {
   const response = await fetch(baseUrl + 'goals-overview');
@@ -59,4 +76,11 @@ const insertNode = async (nodeName, parentId, insertInd) => {
   return await response.json();
 };
 
-export default { findGoal, findOverview, updateNode, deleteNode, insertNode };
+export default {
+  findGoal,
+  createGoal,
+  findOverview,
+  updateNode,
+  deleteNode,
+  insertNode
+};
