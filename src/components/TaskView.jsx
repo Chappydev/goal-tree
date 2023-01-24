@@ -12,9 +12,9 @@ const TaskView = ({ tree, mutations }) => {
   const id = useParams().id;
   const family = treeHelper.findFamilyByIdBFS(tree, id);
   const [rect, setRect] = useState(null);
-  const [editIsShown, editFormNode, editHandleOpen, editHandleClose] =
+  const [editIsShown, editHandleOpen, editHandleClose, editFormNode] =
     useModal();
-  const [addIsShown, addFormNode, addHandleOpen, addHandleClose] = useModal();
+  const [addIsShown, addHandleOpen, addHandleClose, addFormNode] = useModal();
 
   return (
     <div id="task-view-container">

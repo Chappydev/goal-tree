@@ -1,11 +1,15 @@
 import { useState } from 'react';
 
-const useModal = () => {
+const useModal = (requiresNode = true) => {
   const [isShown, setIsShown] = useState(false);
   const [modalNode, setModalNode] = useState(null);
 
-  const openModal = (node) => {
+  const openModalWithNode = (node) => {
     setModalNode(node);
+    setIsShown(true);
+  };
+
+  const openModalWithoutNode = () => {
     setIsShown(true);
   };
 
@@ -13,7 +17,11 @@ const useModal = () => {
     setIsShown(false);
   };
 
-  return [isShown, modalNode, openModal, closeModal];
+  if (!requiresNode) {
+    return [isShown, openModalWithoutNode, closeModal];
+  }
+
+  return [isShown, openModalWithNode, closeModal, modalNode];
 };
 
 export default useModal;
