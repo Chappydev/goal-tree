@@ -27,6 +27,7 @@ const NewNodeForm = ({ node, handleClose }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     addNode.mutate({ name, parentId: node.id, insertInd: ind - 1 });
+    setName('');
     handleClose();
   };
 
