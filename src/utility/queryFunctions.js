@@ -1,8 +1,8 @@
 const baseUrl = 'http://localhost:3001/api/';
 
 // TODO: change so you can choose which goal to fetch
-const findGoal = async () => {
-  const response = await fetch(baseUrl + 'goals/0/');
+const findGoal = async (id) => {
+  const response = await fetch(baseUrl + `goals/${id}`);
   if (!response.ok) {
     throw new Error(response);
   }

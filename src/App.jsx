@@ -7,6 +7,7 @@ import TaskView from './components/TaskView';
 import Tree from './components/Tree';
 import QueryComp from './components/QueryComp';
 import Navbar from './components/Navbar';
+import Paths from './components/Paths';
 
 const queryClient = new QueryClient();
 
@@ -100,7 +101,7 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <div className="App" style={fillWindow}>
         <Navbar />
-        <QueryComp />
+        <Paths />
       </div>
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>

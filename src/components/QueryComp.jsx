@@ -1,18 +1,18 @@
 import React from 'react';
+import { useEffect } from 'react';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, useParams } from 'react-router-dom';
 import queryFunctions from '../utility/queryFunctions';
-import CurrentView from './CurrentView';
 import D3Tree from './D3Tree';
 import TaskView from './TaskView';
-import Tree from './Tree';
 
 const QueryComp = () => {
+  const { goalId } = useParams();
   const queryClient = useQueryClient();
 
   const { isLoading, error, data } = useQuery({
-    queryKey: ['treeData'],
-    queryFn: queryFunctions.findGoal
+    queryKey: ['treeData', goalId],
+    queryFn: () => queryFunctions.findGoal(goalId)
   });
 
   const toggleComplete = useMutation({
@@ -25,7 +25,7 @@ const QueryComp = () => {
       return queryFunctions.updateNode(newNode);
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['treeData'] });
+      queryClient.invalidateQueries({ queryKey: ['treeData', goalId] });
     }
   });
 
@@ -34,7 +34,7 @@ const QueryComp = () => {
       return queryFunctions.deleteNode(currNode);
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['treeData'] });
+      queryClient.invalidateQueries({ queryKey: ['treeData', goalId] });
     }
   });
 
@@ -53,12 +53,11 @@ const QueryComp = () => {
 
   return (
     <Routes>
-      <Route path="/tree" element={<D3Tree data={data} />} />
+      <Route path="/" element={<D3Tree />} />
       <Route
         path="/task/:id"
         element={<TaskView tree={data} mutations={mutations} />}
       />
-      <Route path="/goals" element={<CurrentView />} />
     </Routes>
   );
 };

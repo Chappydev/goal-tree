@@ -12,12 +12,6 @@ const Navbar = () => {
     <div className="navbar">
       Task App!
       <div className="navigation">
-        {/* 
-          TODO: Make tree route based on goal id (/tree/:id)
-        */}
-        <NavLink to={`/tree`}>
-          <button>Tree View</button>
-        </NavLink>
         <NavLink to="/goals">
           <button>Goal Overview</button>
         </NavLink>

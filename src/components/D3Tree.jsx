@@ -1,7 +1,7 @@
 import React from 'react';
 import Tree from 'react-d3-tree';
 import { useQuery } from 'react-query';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import useCenteredTree from '../hooks/useCenteredTree';
 import queryFunctions from '../utility/queryFunctions';
 import './D3Tree.scss';
@@ -22,22 +22,22 @@ const renderNodeWithCustomEvents = ({ nodeDatum, toggleNode, handleClick }) => {
 };
 
 const D3Tree = () => {
+  const { goalId } = useParams();
   const {
     isLoading,
     error,
     data: tree
   } = useQuery({
-    queryKey: ['treeData'],
-    queryFn: queryFunctions.findGoal
+    queryKey: ['treeData', goalId],
+    queryFn: () => queryFunctions.findGoal(goalId)
   });
 
   const navigate = useNavigate();
 
-  // TODO: mess with the translation to look good visually
   const [translate, containerRef] = useCenteredTree();
 
   const handleClick = (nodeDatum) => {
-    navigate(`/task/${nodeDatum.id}`);
+    navigate(`/goal/${goalId}/task/${nodeDatum.id}`);
   };
 
   if (isLoading) {
