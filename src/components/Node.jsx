@@ -57,7 +57,7 @@ const Node = ({
         <div className="plus-container">
           <Plus className="plus option" onClick={() => addHandleOpen(node)} />
         </div>
-        <NavLink to={`/task/${node.id}`} className="node" ref={currNodeRef}>
+        <NavLink to={`../task/${node.id}`} className="node" ref={currNodeRef}>
           <div className="hidden-relative-box">
             <div className="complete-color" style={sizeObj}></div>
             {node.name}
@@ -82,7 +82,7 @@ const Node = ({
       <div className="plus-container">
         <Plus className="plus option" onClick={() => addHandleOpen(node)} />
       </div>
-      <NavLink to={`/task/${node.id}`} className="node" ref={currNodeRef}>
+      <NavLink to={`../task/${node.id}`} className="node" ref={currNodeRef}>
         <div className="hidden-relative-box">
           <div className="complete-color" style={sizeObj}></div>
           {node.name}

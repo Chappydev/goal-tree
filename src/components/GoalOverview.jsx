@@ -9,11 +9,15 @@ const GoalOverview = ({ goalData }) => {
 
   return (
     <div className="overview-container">
-      <h2>{goalData.goalNode.name}</h2>
+      <NavLink to={`/goal/${goalData.goalId}`}>
+        <h2>{goalData.goalNode.name}</h2>
+      </NavLink>
       <div className="current-container">
         <p>
           {'Current: '}
-          <NavLink to={`/task/${goalData.incompleteNodes[ind].id}`}>
+          <NavLink
+            to={`/goal/${goalData.goalId}/task/${goalData.incompleteNodes[ind].id}`}
+          >
             {goalData.incompleteNodes[ind].name}
           </NavLink>
         </p>

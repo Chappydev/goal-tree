@@ -9,7 +9,7 @@ import Node from './Node';
 import './TaskView.scss';
 
 const TaskView = ({ tree, mutations }) => {
-  const id = useParams().id;
+  const { id } = useParams();
   const family = treeHelper.findFamilyByIdBFS(tree, id);
   const [rect, setRect] = useState(null);
   const [editIsShown, editHandleOpen, editHandleClose, editFormNode] =
@@ -19,21 +19,24 @@ const TaskView = ({ tree, mutations }) => {
   return (
     <div id="task-view-container">
       {family.prevSibling ? (
-        <NavLink to={`/task/${family.prevSibling.id}`} className="left-arrow">
+        <NavLink to={`../task/${family.prevSibling.id}`} className="left-arrow">
           &lt;
         </NavLink>
       ) : (
         <div className="left-arrow">&lt;</div>
       )}
       {family.parent ? (
-        <NavLink to={`/task/${family.parent.id}`} className="top-arrow">
+        <NavLink to={`../task/${family.parent.id}`} className="top-arrow">
           ^
         </NavLink>
       ) : (
         <div className="top-arrow">^</div>
       )}
       {family.nextSibling ? (
-        <NavLink to={`/task/${family.nextSibling.id}`} className="right-arrow">
+        <NavLink
+          to={`../task/${family.nextSibling.id}`}
+          className="right-arrow"
+        >
           &gt;
         </NavLink>
       ) : (
