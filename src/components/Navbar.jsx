@@ -4,6 +4,7 @@ import Modal from './Modal';
 import useModal from '../hooks/useModal';
 import './Navbar.scss';
 import NewGoalForm from './NewGoalForm';
+import Button from './Button';
 
 const Navbar = () => {
   const [isShown, openModal, closeModal] = useModal(false);
@@ -17,10 +18,10 @@ const Navbar = () => {
         </NavLink>
       </div>
       <div className="actions">
-        <button onClick={openModal}>New Goal</button>
-        <NavLink>
-          <button>Login</button>
-        </NavLink>
+        <Button>Logout</Button>
+        <Button onClick={openModal} fillType="fill" color="accent">
+          New Goal
+        </Button>
       </div>
       <Modal handleClose={closeModal} isShown={isShown}>
         <NewGoalForm handleClose={closeModal} />

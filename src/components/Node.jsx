@@ -32,8 +32,8 @@ const Node = ({
   useEffect(() => {
     if (node.isComplete) {
       setSizeObj({
-        width: `${colorAnimation * 102}%`,
-        height: `${colorAnimation * 102}%`
+        width: `${colorAnimation * 100}%`,
+        height: `${colorAnimation * 100}%`
       });
     } else {
       setSizeObj({ width: '0%', height: '0%' });

@@ -62,8 +62,8 @@ const Line = ({ x1, y1, x2, y2, delayMult = 1, isComplete }) => {
           x2={directionObj.x2}
           y2={directionObj.y2}
         >
-          <stop offset={offsetObj.offset2} stopColor="#f00" />
-          <stop offset={offsetObj.offset1} stopColor="#0d0" />
+          <stop offset={offsetObj.offset2} stopColor="#e42f17" />
+          <stop offset={offsetObj.offset1} stopColor="#76944b" />
         </linearGradient>
       </defs>
       {/* <line

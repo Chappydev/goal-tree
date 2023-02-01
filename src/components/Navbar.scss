@@ -1,7 +1,10 @@
+@use '../partials/colors' as c;
+
 .navbar {
   display: flex;
-  border-bottom: 1px solid black;
-  padding: 0 1em;
+  background: linear-gradient(c.$bg, c.$bg-light);
+  color: c.$text;
+  padding: 1em 1em;
 }
 
 .navigation {

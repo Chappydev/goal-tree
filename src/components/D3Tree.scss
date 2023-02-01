@@ -1,9 +1,23 @@
-@use 'Node';
+@use '../partials/colors' as c;
 
 .node-circle {
-  fill: Node.$box-bgcolor;
+  fill: c.$red;
   stroke: none;
   &.complete {
-    fill: Node.$box-bgcolor-comp;
+    fill: c.$green;
+  }
+}
+
+.node-name {
+  color: white;
+  fill: white;
+  stroke: none;
+}
+
+// specifity needed to ensure the color change
+.rd3t-link.tree-link {
+  stroke: c.$red;
+  &.complete {
+    stroke: c.$green;
   }
 }
