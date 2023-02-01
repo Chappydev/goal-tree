@@ -1,0 +1,57 @@
+@use '../partials/colors' as c;
+@mixin fill($fill: true, $main, $text) {
+  @if $fill {
+    background-color: $main;
+    color: $text;
+
+    transition: transform 0.09s;
+
+    &:hover {
+      transform: scale(1.06);
+    }
+
+    &:active {
+      transform: scale(0.94);
+    }
+  } @else {
+    background: none;
+    color: $main;
+    opacity: 1;
+
+    transition: opacity 0.09s;
+
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+}
+
+.button {
+  border: none;
+  border-radius: 0.3em;
+  padding: 0.3em 0.5em;
+  margin-left: 0.5em;
+  cursor: pointer;
+}
+
+.primary {
+  $main: c.$primary;
+  $text: c.$white;
+  &.none {
+    @include fill(false, $main, $text);
+  }
+  &.fill {
+    @include fill(true, $main, $text);
+  }
+}
+
+.accent {
+  $main: c.$green;
+  $text: c.$white;
+  &.none {
+    @include fill(false, $main, $text);
+  }
+  &.fill {
+    @include fill(true, $main, $text);
+  }
+}
