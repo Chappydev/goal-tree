@@ -8,6 +8,7 @@ import Tree from './components/Tree';
 import QueryComp from './components/QueryComp';
 import Navbar from './components/Navbar';
 import Paths from './components/Paths';
+import './App.scss';
 
 const queryClient = new QueryClient();
 

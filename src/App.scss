@@ -1,0 +1,6 @@
+@use 'partials/colors' as c;
+
+.App {
+  background-color: c.$bg;
+  color: c.$text;
+}
