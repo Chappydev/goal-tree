@@ -4,6 +4,7 @@ $dark-blue1: #14213e;
 $dark-blue2: #101a30;
 $dark-blue-shade-up: hsl(221, 50%, 23%);
 $light-blue1: #335399;
+$light-blue1-shade-up: hsl(221, 50%, 50%);
 $light-blue2: hsl(221, 50%, 93%);
 $red1: #ee6352;
 $red2: #fe5f55;
@@ -19,7 +20,10 @@ $green5: #76944b;
 // Theme
 $bg: $dark-blue2;
 $bg-light: $dark-blue-shade-up;
-$primary: $light-blue2;
+$primary: $light-blue1-shade-up;
+$primary-light: $light-blue2;
 $text: $white;
+// TODO: Change text-dark. Should be darker I think
+$text-dark: $dark-blue2;
 $red: $red5;
 $green: $green5;
