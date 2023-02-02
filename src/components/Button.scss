@@ -45,6 +45,17 @@
   }
 }
 
+.primary-light {
+  $main: c.$primary-light;
+  $text: c.$text-dark;
+  &.none {
+    @include fill(false, $main, $text);
+  }
+  &.fill {
+    @include fill(true, $main, $text);
+  }
+}
+
 .accent {
   $main: c.$green;
   $text: c.$white;
