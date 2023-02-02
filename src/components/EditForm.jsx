@@ -47,7 +47,7 @@ const EditForm = ({ node, handleClose }) => {
         value={name}
         onChange={(e) => setName(e.target.value)}
       /> */}
-      <TextInput onChange={setName} name="name" value={name} label="Name" />
+      <TextInput setValue={setName} name="name" value={name} label="Name" />
       <div className="form-buttons">
         {/* <button
           className="modal-button close"

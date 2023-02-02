@@ -36,7 +36,7 @@ const NewGoalForm = ({ handleClose }) => {
         onChange={(e) => setName(e.target.value)}
       /> */}
       <TextInput
-        onChange={setName}
+        setValue={setName}
         name="name"
         value={name}
         label="Goal Name"
