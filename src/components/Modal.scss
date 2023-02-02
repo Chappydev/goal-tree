@@ -1,3 +1,5 @@
+@use '../partials/colors' as c;
+
 $section-height: 30px;
 $spacing: 0.5em;
 
@@ -24,12 +26,27 @@ $spacing: 0.5em;
   display: grid;
   grid-template-rows: $section-height 1fr;
   gap: $spacing;
-  background-color: rgba($color: #ffffff, $alpha: 1);
+  background-color: c.$bg;
   width: 80%;
   max-height: 80%;
+  border-radius: 0.5em;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
 
   padding: $spacing;
+}
+
+.modal-top {
+  display: flex;
+  justify-content: end;
+
+  .x-close {
+    color: c.$text;
+    opacity: 0.6;
+    cursor: pointer;
+    &:hover {
+      opacity: 0.8;
+    }
+  }
 }

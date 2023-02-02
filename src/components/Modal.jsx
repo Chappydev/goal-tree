@@ -1,4 +1,5 @@
 import React from 'react';
+import { X } from 'react-feather';
 import './Modal.scss';
 
 const Modal = ({ handleClose, isShown, children }) => {
@@ -12,7 +13,9 @@ const Modal = ({ handleClose, isShown, children }) => {
       onClick={(e) => (e.target === e.currentTarget ? handleClose() : null)}
     >
       <section className="inner-modal">
-        <div className="modal-top">The top part</div>
+        <div className="modal-top">
+          <X className="x-close" onClick={handleClose} />
+        </div>
         <div className="modal-content">{children}</div>
       </section>
     </div>
