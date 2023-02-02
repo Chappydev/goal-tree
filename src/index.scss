@@ -54,12 +54,16 @@ picture {
   display: block;
 }
 
-/* Inherit fonts for inputs and buttons */
+/* Inherit fonts for inputs and buttons, remove outline on focus */
 input,
 button,
 textarea,
 select {
+  border: none;
   font: inherit;
+  &:focus {
+    outline: none;
+  }
 }
 
 /* Remove all animations, transitions and smooth scroll for people that prefer not to see them */

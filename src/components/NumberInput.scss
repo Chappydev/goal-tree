@@ -1,0 +1,7 @@
+@use '../partials/inputs';
+
+input[type='number'] {
+  align-self: start;
+  border-radius: 0.2em;
+  padding: 0.2em 0.5em;
+}
