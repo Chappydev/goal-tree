@@ -3,6 +3,8 @@ import './EditForm.scss';
 import { useEffect } from 'react';
 import { useMutation, useQueryClient } from 'react-query';
 import queryFunctions from '../utility/queryFunctions';
+import Button from './Button';
+import TextInput from './TextInput';
 
 const EditForm = ({ node, handleClose }) => {
   const [name, setName] = useState(node?.name ? node.name : '');
@@ -38,15 +40,16 @@ const EditForm = ({ node, handleClose }) => {
 
   return (
     <form className="form edit" onSubmit={handleSubmit}>
-      <input
+      {/* <input
         className="input"
         type="text"
         name="name"
         value={name}
         onChange={(e) => setName(e.target.value)}
-      />
+      /> */}
+      <TextInput onChange={setName} name="name" value={name} label="Name" />
       <div className="form-buttons">
-        <button
+        {/* <button
           className="modal-button close"
           type="button"
           onClick={handleClose}
@@ -55,7 +58,11 @@ const EditForm = ({ node, handleClose }) => {
         </button>
         <button className="modal-button submit" type="submit">
           Submit
-        </button>
+        </button> */}
+        <Button onClick={handleClose}>Close</Button>
+        <Button color="primary" fillType="fill" type="submit">
+          Submit
+        </Button>
       </div>
     </form>
   );

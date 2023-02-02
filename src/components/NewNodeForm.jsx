@@ -3,6 +3,9 @@ import './NewNodeForm.scss';
 import { useEffect } from 'react';
 import { useMutation, useQueryClient } from 'react-query';
 import queryFunctions from '../utility/queryFunctions';
+import Button from './Button';
+import TextInput from './TextInput';
+import NumberInput from './NumberInput';
 
 const NewNodeForm = ({ node, handleClose }) => {
   const [name, setName] = useState('');
@@ -52,7 +55,7 @@ const NewNodeForm = ({ node, handleClose }) => {
   return (
     <form className="form add" onSubmit={handleSubmit}>
       <p>Parent Node: {node?.name}</p>
-      <label>
+      {/* <label>
         <input
           type="number"
           className="number-input index"
@@ -61,8 +64,15 @@ const NewNodeForm = ({ node, handleClose }) => {
           value={ind}
           onChange={handleChange}
         />
-      </label>
-      <label>
+      </label> */}
+      <NumberInput
+        setValue={setInd}
+        value={ind}
+        min={1}
+        max={node.children.length + 1}
+        label="Insertion Node"
+      />
+      {/* <label>
         Name:
         <input
           className="text-input name"
@@ -71,9 +81,10 @@ const NewNodeForm = ({ node, handleClose }) => {
           value={name}
           onChange={(e) => setName(e.target.value)}
         />
-      </label>
+      </label> */}
+      <TextInput onChange={setName} name="name" value={name} label="Name" />
       <div className="form-buttons">
-        <button
+        {/* <button
           className="modal-button close"
           type="button"
           onClick={() => handleClose()}
@@ -82,7 +93,12 @@ const NewNodeForm = ({ node, handleClose }) => {
         </button>
         <button className="modal-button submit" type="submit">
           Submit
-        </button>
+        </button> */}
+
+        <Button onClick={handleClose}>Close</Button>
+        <Button color="primary" fillType="fill" type="submit">
+          Submit
+        </Button>
       </div>
     </form>
   );

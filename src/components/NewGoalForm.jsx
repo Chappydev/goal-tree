@@ -3,6 +3,8 @@ import './EditForm.scss';
 import { useEffect } from 'react';
 import { useMutation, useQueryClient } from 'react-query';
 import queryFunctions from '../utility/queryFunctions';
+import Button from './Button';
+import TextInput from './TextInput';
 
 const NewGoalForm = ({ handleClose }) => {
   const [name, setName] = useState('');
@@ -26,24 +28,24 @@ const NewGoalForm = ({ handleClose }) => {
 
   return (
     <form className="form add-goal" onSubmit={handleSubmit}>
-      <input
+      {/* <input
         className="input"
         type="text"
         name="name"
         value={name}
         onChange={(e) => setName(e.target.value)}
+      /> */}
+      <TextInput
+        onChange={setName}
+        name="name"
+        value={name}
+        label="Goal Name"
       />
       <div className="form-buttons">
-        <button
-          className="modal-button close"
-          type="button"
-          onClick={handleClose}
-        >
-          Close
-        </button>
-        <button className="modal-button submit" type="submit">
+        <Button onClick={handleClose}>Close</Button>
+        <Button color="accent" fillType="fill" type="submit">
           Submit
-        </button>
+        </Button>
       </div>
     </form>
   );
