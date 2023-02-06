@@ -1,7 +1,14 @@
 import React from 'react';
 import './TextInput.scss';
 
-const TextInput = ({ setValue, value, name, label, className }) => {
+const TextInput = ({
+  setValue,
+  value,
+  name,
+  label,
+  className,
+  password = false
+}) => {
   const onChange = (e) => {
     setValue(e.target.value);
   };
@@ -10,7 +17,7 @@ const TextInput = ({ setValue, value, name, label, className }) => {
     <label>
       {label}
       <input
-        type="text"
+        type={password ? 'password' : 'text'}
         name={name}
         className={className}
         value={value}

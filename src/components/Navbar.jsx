@@ -5,9 +5,16 @@ import useModal from '../hooks/useModal';
 import './Navbar.scss';
 import NewGoalForm from './NewGoalForm';
 import Button from './Button';
+import { useState } from 'react';
+import LoginForm from './LoginForm';
 
 const Navbar = () => {
-  const [isShown, openModal, closeModal] = useModal(false);
+  const [goalFormIsShown, openGoalModal, closeGoalModal] = useModal(false);
+  const [loginFormIsShown, openLoginModal, closeLoginModal] = useModal(false);
+  const [useSignUp, setUseSignUp] = useState(true);
+  // NOTE: this state is temporary and should later be based
+  //       on the user object.
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   return (
     <div className="navbar">
@@ -18,13 +25,47 @@ const Navbar = () => {
         </NavLink>
       </div>
       <div className="actions">
-        <Button>Logout</Button>
-        <Button onClick={openModal} fillType="fill" color="accent">
-          New Goal
-        </Button>
+        {isLoggedIn ? (
+          <>
+            <Button onClick={() => setIsLoggedIn(false)}>Logout</Button>
+            <Button onClick={openGoalModal} fillType="fill" color="accent">
+              New Goal
+            </Button>
+          </>
+        ) : (
+          <>
+            <Button
+              onClick={() => {
+                setUseSignUp(false);
+                openLoginModal();
+              }}
+              fillType="fill"
+              color="primary"
+            >
+              Login
+            </Button>
+            <Button
+              onClick={() => {
+                setUseSignUp(true);
+                openLoginModal();
+              }}
+              fillType="fill"
+              color="accent"
+            >
+              Sign Up
+            </Button>
+          </>
+        )}
       </div>
-      <Modal handleClose={closeModal} isShown={isShown}>
-        <NewGoalForm handleClose={closeModal} />
+      <Modal handleClose={closeGoalModal} isShown={goalFormIsShown}>
+        <NewGoalForm handleClose={closeGoalModal} />
+      </Modal>
+      <Modal handleClose={closeLoginModal} isShown={loginFormIsShown}>
+        <LoginForm
+          handleClose={closeLoginModal}
+          useSignUp={useSignUp}
+          setUseSignUp={setUseSignUp}
+        />
       </Modal>
     </div>
   );
