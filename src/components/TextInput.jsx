@@ -7,7 +7,8 @@ const TextInput = ({
   name,
   label,
   className,
-  password = false
+  password = false,
+  autocomplete
 }) => {
   const onChange = (e) => {
     setValue(e.target.value);
@@ -22,6 +23,7 @@ const TextInput = ({
         className={className}
         value={value}
         onChange={onChange}
+        autoComplete={autocomplete}
       />
     </label>
   );
