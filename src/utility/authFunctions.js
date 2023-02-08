@@ -52,17 +52,11 @@ const login = async (credentials) => {
     throw new Error(response.body.error);
   }
 
-  const token = await response.json();
-
-  if (token) {
-    setStoredUser(token);
-  }
-
-  return token;
+  return await response.json();
 };
 
-const logout = async () => {
-  clearStoredUser();
+const logout = () => {
+  return new Promise((resolve, reject) => resolve(clearStoredUser()));
 };
 
 export default { getUser, createUser, login, logout };
