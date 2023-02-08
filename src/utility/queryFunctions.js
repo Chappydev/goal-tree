@@ -1,3 +1,5 @@
+import { getStoredUser } from './localUserFunctions';
+
 const baseUrl = 'http://localhost:3001/api/';
 
 // TODO: change so you can choose which goal to fetch
@@ -26,13 +28,28 @@ const createGoal = async (name) => {
   return await response.json();
 };
 
-// TODO: change so overview gives you data about ALL goals by default
 const findOverview = async () => {
-  const response = await fetch(baseUrl + 'goals-overview');
-  if (!response.ok) {
-    throw new Error(response);
+  const user = getStoredUser();
+  console.log(user);
+
+  if (!user) {
+    throw new Error({ error: 'Not currently logged in' });
   }
-  return await response.json();
+
+  try {
+    const response = await fetch(baseUrl + 'goalsoverview', {
+      headers: {
+        Authorization: `Bearer ${user.token}`
+      }
+    });
+
+    if (!response.ok) {
+      throw new Error(response.error);
+    }
+    return await response.json();
+  } catch (error) {
+    throw new Error(error);
+  }
 };
 
 const updateNode = async (newNode) => {
