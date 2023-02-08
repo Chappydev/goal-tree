@@ -147,7 +147,7 @@ const CurrentView = () => {
   return (
     <div>
       {data.map((goalData) => (
-        <GoalOverview key={goalData.goalId} goalData={goalData} />
+        <GoalOverview key={goalData.id} goalData={goalData} />
       ))}
     </div>
   );

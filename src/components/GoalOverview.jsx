@@ -2,21 +2,26 @@ import React from 'react';
 import { useState } from 'react';
 import { ArrowDown, ArrowUp } from 'react-feather';
 import { NavLink } from 'react-router-dom';
+import treeHelper from '../utility/treeHelper';
 import './GoalOverview.scss';
 
 const GoalOverview = ({ goalData }) => {
-  const [ind, setInd] = useState(goalData.incompleteNodes.length - 1);
+  const goalDepth = treeHelper.findDeepestLayer(goalData.insertionNode);
+  const [layer, setLayer] = useState(goalDepth);
 
   return (
     <div className="overview-container">
-      <NavLink to={`/goal/${goalData.goalId}`}>
-        <h2>{goalData.goalNode.name}</h2>
+      <NavLink to={`/goal/${goalData.id}`}>
+        <h2>{goalData.insertionNode.name}</h2>
       </NavLink>
       <div className="current-container">
+        {/* 
+        // TODO: redo this to better suit the new data
+        // TODO: maybe add helper function to navigate the tree
         <p>
           {'Current: '}
           <NavLink
-            to={`/goal/${goalData.goalId}/task/${goalData.incompleteNodes[ind].id}`}
+            to={`/goal/${goalData.id}/task/${goalData.incompleteNodes[ind].id}`}
           >
             {goalData.incompleteNodes[ind].name}
           </NavLink>
@@ -36,7 +41,7 @@ const GoalOverview = ({ goalData }) => {
                 : setInd(0)
             }
           />
-        </div>
+        </div> */}
       </div>
     </div>
   );
