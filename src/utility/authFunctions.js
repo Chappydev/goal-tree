@@ -1,6 +1,6 @@
 const baseUrl = 'http://localhost:3001/api/';
 
-const getToken = () => {
+const getStoredUser = () => {
   const token = JSON.parse(localStorage.getItem('authenticated-user'));
   if (!token) {
     return null;
@@ -8,28 +8,28 @@ const getToken = () => {
   return token;
 };
 
-const setToken = (token) => {
-  localStorage.setItem('authenticated-user', JSON.stringify(token));
+const setStoredUser = (user) => {
+  localStorage.setItem('authenticated-user', JSON.stringify(user));
 };
 
-const clearToken = () => {
+const clearStoredUser = () => {
   localStorage.removeItem('authenticated-user');
 };
 
-const getUser = async (id) => {
-  const token = getToken();
+const getUser = async () => {
+  const storedUser = getStoredUser();
 
-  if (!token) {
+  if (!storedUser) {
     return null;
   }
 
-  const response = await fetch(baseUrl + `users/${id}`, {
+  const response = await fetch(baseUrl + `users/${storedUser.id}`, {
     headers: {
-      Authentication: `Bearer ${token}`
+      Authentication: `Bearer ${storedUser.token}`
     }
   });
   if (!response.ok) {
-    throw new Error(response.body);
+    throw new Error(response.body.error);
   }
 
   return await response.json();
@@ -37,14 +37,14 @@ const getUser = async (id) => {
 
 const createUser = async (credentials) => {
   const response = await fetch(baseUrl + 'users', {
-    type: 'POST',
+    method: 'POST',
     headers: {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify(credentials)
   });
   if (!response.ok) {
-    throw new Error(response.body);
+    throw new Error(response.body.error);
   }
 
   login(credentials);
@@ -54,27 +54,27 @@ const createUser = async (credentials) => {
 
 const login = async (credentials) => {
   const response = await fetch(baseUrl + 'login', {
-    type: 'POST',
+    method: 'POST',
     headers: {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify(credentials)
   });
   if (!response.ok) {
-    throw new Error(response.body);
+    throw new Error(response.body.error);
   }
 
   const token = await response.json();
 
   if (token) {
-    setToken(token);
+    setStoredUser(token);
   }
 
   return token;
 };
 
 const logout = async () => {
-  clearToken();
+  clearStoredUser();
 };
 
 export default { getUser, createUser, login, logout };
