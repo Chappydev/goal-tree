@@ -1,5 +1,5 @@
 import React from 'react';
-import { useQuery } from 'react-query';
+import { useQuery } from '@tanstack/react-query';
 import { NavLink } from 'react-router-dom';
 import queryFunctions from '../utility/queryFunctions';
 import GoalOverview from './GoalOverview';

@@ -1,6 +1,6 @@
 import React from 'react';
 import Tree from 'react-d3-tree';
-import { useQuery } from 'react-query';
+import { useQuery } from '@tanstack/react-query';
 import { useNavigate, useParams } from 'react-router-dom';
 import useCenteredTree from '../hooks/useCenteredTree';
 import queryFunctions from '../utility/queryFunctions';
