@@ -19,7 +19,7 @@ function App() {
       <div className="App" style={fillWindow}>
         <Navbar />
         <AuthLoader
-          renderLoading={() => <div>Loading...</div>}
+          renderLoading={() => <div>User Loading...</div>}
           renderUnauthenticated={() => (
             <div>Unauthenticated: Login or Sign Up first</div>
           )}
