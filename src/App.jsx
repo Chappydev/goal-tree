@@ -4,6 +4,7 @@ import Paths from './components/Paths';
 import { AuthLoader } from './hooks/authHooks';
 import './App.scss';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
 const queryClient = new QueryClient();
 
@@ -26,7 +27,7 @@ function App() {
           <Paths />
         </AuthLoader>
       </div>
-      {/* <ReactQueryDevtoolsPanel initialIsOpen={false} /> */}
+      <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   );
 }
