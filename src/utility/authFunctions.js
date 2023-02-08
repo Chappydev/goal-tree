@@ -1,20 +1,10 @@
+import {
+  clearStoredUser,
+  getStoredUser,
+  setStoredUser
+} from './localUserFunctions';
+
 const baseUrl = 'http://localhost:3001/api/';
-
-const getStoredUser = () => {
-  const token = JSON.parse(localStorage.getItem('authenticated-user'));
-  if (!token) {
-    return null;
-  }
-  return token;
-};
-
-const setStoredUser = (user) => {
-  localStorage.setItem('authenticated-user', JSON.stringify(user));
-};
-
-const clearStoredUser = () => {
-  localStorage.removeItem('authenticated-user');
-};
 
 const getUser = async () => {
   const storedUser = getStoredUser();
@@ -46,8 +36,6 @@ const createUser = async (credentials) => {
   if (!response.ok) {
     throw new Error(response.body.error);
   }
-
-  login(credentials);
 
   return await response.json();
 };
