@@ -1,28 +1,40 @@
 import React from 'react';
 import { useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { useLogin } from '../hooks/authHooks';
 import Button from './Button';
 import TextInput from './TextInput';
 
-const LoginForm = ({ handleClose, useSignUp, setUseSignUp }) => {
+const LoginForm = ({ handleClose, setUseSignUp }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const login = useLogin();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setUsername('');
-    setPassword('');
-    handleClose();
+    // TODO: on failed login, give an appropriate message to the user
+    login.mutate(
+      { username, password },
+      {
+        onSuccess: () => {
+          setUsername('');
+          handleClose();
+        },
+        onSettled: () => {
+          setPassword('');
+        }
+      }
+    );
   };
 
   return (
     <form className="form login" onSubmit={handleSubmit}>
-      <h2>{useSignUp ? 'Sign up' : 'Login'}</h2>
+      <h2>Login</h2>
       <TextInput
         setValue={setUsername}
         name="username"
         value={username}
         label="Username"
+        autocomplete="username"
       />
       <TextInput
         setValue={setPassword}
@@ -30,6 +42,7 @@ const LoginForm = ({ handleClose, useSignUp, setUseSignUp }) => {
         value={password}
         label="Password"
         password={true}
+        autocomplete="current-password"
       />
       <div>
         {/* 
@@ -39,12 +52,10 @@ const LoginForm = ({ handleClose, useSignUp, setUseSignUp }) => {
           href=""
           onClick={(e) => {
             e.preventDefault();
-            setUseSignUp(!useSignUp);
+            setUseSignUp(true);
           }}
         >
-          {useSignUp
-            ? 'Already have an account? Login instead'
-            : "Don't have an account? Sign up instead"}
+          Don't have an account yet? Sign up
         </a>
       </div>
       <div className="form-buttons">
