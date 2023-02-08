@@ -1,6 +1,7 @@
 import React from 'react';
 import { useState } from 'react';
 import { useLogin } from '../hooks/authHooks';
+import { setStoredUser } from '../utility/localUserFunctions';
 import Button from './Button';
 import TextInput from './TextInput';
 
@@ -15,7 +16,8 @@ const LoginForm = ({ handleClose, setUseSignUp }) => {
     login.mutate(
       { username, password },
       {
-        onSuccess: () => {
+        onSuccess: (user) => {
+          setStoredUser(user);
           setUsername('');
           handleClose();
         },
