@@ -4,7 +4,7 @@ const baseUrl = 'http://localhost:3001/api/';
 const findGoal = async (id) => {
   const response = await fetch(baseUrl + `goals/${id}`);
   if (!response.ok) {
-    throw new Error(response);
+    throw new Error(response.body.error ?? '');
   }
   return await response.json();
 };
