@@ -8,6 +8,7 @@ import Button from './Button';
 import { useState } from 'react';
 import LoginForm from './LoginForm';
 import SignUpForm from './SignUpForm';
+import { useLogout, useUser } from '../hooks/authHooks';
 
 const Navbar = () => {
   const [goalFormIsShown, openGoalModal, closeGoalModal] = useModal(false);
@@ -15,7 +16,8 @@ const Navbar = () => {
   const [useSignUp, setUseSignUp] = useState(true);
   // NOTE: this state is temporary and should later be based
   //       on the user object.
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const { isSuccess, data: user } = useUser();
+  const logout = useLogout();
 
   return (
     <div className="navbar">
@@ -26,9 +28,9 @@ const Navbar = () => {
         </NavLink>
       </div>
       <div className="actions">
-        {isLoggedIn ? (
+        {isSuccess && user ? (
           <>
-            <Button onClick={() => setIsLoggedIn(false)}>Logout</Button>
+            <Button onClick={() => logout.mutate()}>Logout</Button>
             <Button onClick={openGoalModal} fillType="fill" color="accent">
               New Goal
             </Button>
