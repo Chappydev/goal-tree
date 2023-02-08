@@ -7,6 +7,7 @@ import NewGoalForm from './NewGoalForm';
 import Button from './Button';
 import { useState } from 'react';
 import LoginForm from './LoginForm';
+import SignUpForm from './SignUpForm';
 
 const Navbar = () => {
   const [goalFormIsShown, openGoalModal, closeGoalModal] = useModal(false);
@@ -61,11 +62,17 @@ const Navbar = () => {
         <NewGoalForm handleClose={closeGoalModal} />
       </Modal>
       <Modal handleClose={closeLoginModal} isShown={loginFormIsShown}>
-        <LoginForm
-          handleClose={closeLoginModal}
-          useSignUp={useSignUp}
-          setUseSignUp={setUseSignUp}
-        />
+        {useSignUp ? (
+          <SignUpForm
+            handleClose={closeLoginModal}
+            setUseSignUp={setUseSignUp}
+          />
+        ) : (
+          <LoginForm
+            handleClose={closeLoginModal}
+            setUseSignUp={setUseSignUp}
+          />
+        )}
       </Modal>
     </div>
   );
