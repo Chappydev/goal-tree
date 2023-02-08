@@ -30,7 +30,6 @@ const createGoal = async (name) => {
 
 const findOverview = async () => {
   const user = getStoredUser();
-  console.log(user);
 
   if (!user) {
     throw new Error({ error: 'Not currently logged in' });
