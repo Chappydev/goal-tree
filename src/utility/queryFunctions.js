@@ -25,13 +25,20 @@ const findGoal = async (id) => {
 };
 
 const createGoal = async (name) => {
+  const user = getStoredUser();
+
+  if (!user) {
+    throw new Error({ error: 'Not currently logged in' });
+  }
+
   const body = JSON.stringify({
     name
   });
   const response = await fetch(baseUrl + 'goals/', {
     method: 'POST',
     headers: {
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${user.token}`
     },
     body
   });
@@ -65,10 +72,17 @@ const findOverview = async () => {
 };
 
 const updateNode = async (newNode) => {
+  const user = getStoredUser();
+
+  if (!user) {
+    throw new Error({ error: 'Not currently logged in' });
+  }
+
   const response = await fetch(baseUrl + 'nodes/' + newNode.id, {
     method: 'PUT',
     headers: {
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${user.token}`
     },
     body: JSON.stringify(newNode)
   });
@@ -79,8 +93,17 @@ const updateNode = async (newNode) => {
 };
 
 const deleteNode = async (node) => {
+  const user = getStoredUser();
+
+  if (!user) {
+    throw new Error({ error: 'Not currently logged in' });
+  }
+
   const response = await fetch(baseUrl + 'nodes/' + node.id, {
-    method: 'DELETE'
+    method: 'DELETE',
+    headers: {
+      Authorization: `Bearer ${user.token}`
+    }
   });
   if (!response.ok) {
     throw new Error(response);
@@ -88,6 +111,12 @@ const deleteNode = async (node) => {
 };
 
 const insertNode = async (nodeName, parentId, insertInd) => {
+  const user = getStoredUser();
+
+  if (!user) {
+    throw new Error({ error: 'Not currently logged in' });
+  }
+
   const body = JSON.stringify({
     name: nodeName,
     insertInd
@@ -95,7 +124,8 @@ const insertNode = async (nodeName, parentId, insertInd) => {
   const response = await fetch(baseUrl + 'nodes/' + parentId, {
     method: 'POST',
     headers: {
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${user.token}`
     },
     body
   });
