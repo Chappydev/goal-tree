@@ -5,6 +5,7 @@ import { Route, Routes, useParams } from 'react-router-dom';
 import queryFunctions from '../utility/queryFunctions';
 import D3Tree from './D3Tree';
 import TaskView from './TaskView';
+import treeHelper from '../utility/treeHelper';
 
 const QueryComp = () => {
   const { goalId } = useParams();
@@ -24,7 +25,32 @@ const QueryComp = () => {
       };
       return queryFunctions.updateNode(newNode);
     },
-    onSuccess: () => {
+    onMutate: async (currNode) => {
+      await queryClient.cancelQueries({ queryKey: ['treeData', goalId] });
+
+      const newNode = {
+        ...currNode,
+        isComplete: !currNode.isComplete
+      };
+
+      const prevGoal = queryClient.getQueryData(['treeData', goalId]);
+
+      const newTree = treeHelper.findNodeByIdDFSAndUpdate(
+        prevGoal.insertionNode,
+        newNode.id,
+        newNode
+      );
+
+      const newGoal = { ...prevGoal, insertionNode: newTree };
+
+      queryClient.setQueryData(['treeData', goalId], newGoal);
+
+      return { prevGoal, newGoal };
+    },
+    onError: (err, _, context) => {
+      queryClient.setQueryData(['treeData', goalId], context.prevGoal);
+    },
+    onSettled: () => {
       queryClient.invalidateQueries({ queryKey: ['treeData', goalId] });
     }
   });
@@ -33,7 +59,26 @@ const QueryComp = () => {
     mutationFn: (currNode) => {
       return queryFunctions.deleteNode(currNode);
     },
-    onSuccess: () => {
+    onMutate: async (currNode) => {
+      await queryClient.cancelQueries({ queryKey: ['treeData', goalId] });
+
+      const prevGoal = queryClient.getQueryData(['treeData', goalId]);
+
+      const newTree = treeHelper.findNodeByIdDFSAndDelete(
+        prevGoal.insertionNode,
+        currNode.id
+      );
+
+      const newGoal = { ...prevGoal, insertionNode: newTree };
+
+      queryClient.setQueryData(['treeData', goalId], newGoal);
+
+      return { prevGoal, newGoal };
+    },
+    onError: (err, _, context) => {
+      queryClient.setQueryData(['treeData', goalId], context.prevGoal);
+    },
+    onSettled: () => {
       queryClient.invalidateQueries({ queryKey: ['treeData', goalId] });
     }
   });
@@ -56,7 +101,7 @@ const QueryComp = () => {
       <Route path="/" element={<D3Tree />} />
       <Route
         path="/task/:id"
-        element={<TaskView tree={data.insertionNode} mutations={mutations} />}
+        element={<TaskView goal={data} mutations={mutations} />}
       />
     </Routes>
   );

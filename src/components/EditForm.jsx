@@ -5,8 +5,9 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import queryFunctions from '../utility/queryFunctions';
 import Button from './Button';
 import TextInput from './TextInput';
+import treeHelper from '../utility/treeHelper';
 
-const EditForm = ({ node, handleClose }) => {
+const EditForm = ({ node, handleClose, goalId }) => {
   const [name, setName] = useState(node?.name ? node.name : '');
   const queryClient = useQueryClient();
 
@@ -23,8 +24,33 @@ const EditForm = ({ node, handleClose }) => {
       };
       return queryFunctions.updateNode(newNode);
     },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['treeData'] });
+    onMutate: async (currNode) => {
+      await queryClient.cancelQueries({ queryKey: ['treeData', goalId] });
+
+      const newNode = {
+        ...currNode,
+        name
+      };
+
+      const prevGoal = queryClient.getQueryData(['treeData', goalId]);
+
+      const newTree = treeHelper.findNodeByIdDFSAndUpdate(
+        prevGoal.insertionNode,
+        newNode.id,
+        newNode
+      );
+
+      const newGoal = { ...prevGoal, insertionNode: newTree };
+
+      queryClient.setQueryData(['treeData', goalId], newGoal);
+
+      return { prevGoal, newGoal };
+    },
+    onError: (err, _, context) => {
+      queryClient.setQueryData(['treeData', goalId], context.prevGoal);
+    },
+    onSettled: () => {
+      queryClient.invalidateQueries({ queryKey: ['treeData', goalId] });
     }
   });
 

@@ -8,7 +8,8 @@ import NewNodeForm from './NewNodeForm';
 import Node from './Node';
 import './TaskView.scss';
 
-const TaskView = ({ tree, mutations }) => {
+const TaskView = ({ goal, mutations }) => {
+  const tree = goal.insertionNode;
   const { id } = useParams();
   const family = treeHelper.findFamilyByIdBFS(tree, id);
   const [rect, setRect] = useState(null);
@@ -87,10 +88,18 @@ const TaskView = ({ tree, mutations }) => {
         </div>
       </div>
       <Modal handleClose={editHandleClose} isShown={editIsShown}>
-        <EditForm node={editFormNode} handleClose={editHandleClose} />
+        <EditForm
+          node={editFormNode}
+          handleClose={editHandleClose}
+          goalId={goal.id}
+        />
       </Modal>
       <Modal handleClose={addHandleClose} isShown={addIsShown}>
-        <NewNodeForm node={addFormNode} handleClose={addHandleClose} />
+        <NewNodeForm
+          node={addFormNode}
+          handleClose={addHandleClose}
+          goalId={goal.id}
+        />
       </Modal>
     </div>
   );

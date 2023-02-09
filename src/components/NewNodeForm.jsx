@@ -6,8 +6,10 @@ import queryFunctions from '../utility/queryFunctions';
 import Button from './Button';
 import TextInput from './TextInput';
 import NumberInput from './NumberInput';
+import { generateId } from '../utility/miscFunctions';
+import treeHelper from '../utility/treeHelper';
 
-const NewNodeForm = ({ node, handleClose }) => {
+const NewNodeForm = ({ node, handleClose, goalId }) => {
   const [name, setName] = useState('');
   const [ind, setInd] = useState(node ? node.children.length + 1 : 1);
   const queryClient = useQueryClient();
@@ -22,8 +24,38 @@ const NewNodeForm = ({ node, handleClose }) => {
     mutationFn: ({ name, parentId, insertInd }) => {
       return queryFunctions.insertNode(name, parentId, insertInd);
     },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['treeData'] });
+    onMutate: async ({ name, parentId, insertInd }) => {
+      await queryClient.cancelQueries({ queryKey: ['treeData', goalId] });
+
+      const prevGoal = queryClient.getQueryData(['treeData', goalId]);
+
+      const newNode = {
+        id: generateId(),
+        name,
+        isComplete: false,
+        children: []
+      };
+
+      const newTree = treeHelper.findNodeByIdDFSAndUpdate(
+        prevGoal.insertionNode,
+        parentId,
+        (node) => {
+          node.children.splice(insertInd, 0, newNode);
+          return node;
+        }
+      );
+
+      const newGoal = { ...prevGoal, insertionNode: newTree };
+
+      queryClient.setQueryData(['treeData', goalId], newGoal);
+
+      return { prevGoal, newGoal };
+    },
+    onError: (err, _, context) => {
+      queryClient.setQueryData(['treeData', goalId], context.prevGoal);
+    },
+    onSettled: () => {
+      queryClient.invalidateQueries({ queryKey: ['treeData', goalId] });
     }
   });
 
