@@ -88,6 +88,70 @@ const findNodeByIdBFS = (node, id) => {
   return null;
 };
 
+const findNodeByIdDFSAndUpdate = (node, id, newNode) => {
+  if (!node) {
+    return false;
+  }
+
+  const nodeCopy = structuredClone(node);
+
+  const updateNodeHelper = (node, id, newNode) => {
+    if (node.id === id) {
+      if (typeof newNode === 'object') {
+        return newNode;
+      } else {
+        return newNode(node);
+      }
+    }
+
+    if (node.children.length < 1) {
+      return node;
+    }
+
+    node.children = node.children.map((child) =>
+      updateNodeHelper(child, id, newNode)
+    );
+    return node;
+  };
+
+  return updateNodeHelper(nodeCopy, id, newNode);
+};
+
+const findNodeByIdDFSAndDelete = (node, id) => {
+  if (!node) {
+    return false;
+  }
+  console.log(id);
+
+  const nodeCopy = structuredClone(node);
+
+  let found = false;
+  const deleteNodeHelper = (node, id) => {
+    if (node.id === id) {
+      return null;
+    }
+
+    if (node.children.length < 1) {
+      return node;
+    }
+
+    const children = [];
+    for (let child of node.children) {
+      if (child.id === id) {
+        found = true;
+        continue;
+      }
+
+      children.push(found ? child : deleteNodeHelper(child, id));
+    }
+
+    node.children = children;
+    return node;
+  };
+
+  return deleteNodeHelper(nodeCopy, id);
+};
+
 const testBFS = (node) => {
   if (!node) {
     return false;
@@ -194,6 +258,8 @@ export default {
   findBroadestLayer,
   findNodeByIdBFS,
   findFamilyByIdBFS,
+  findNodeByIdDFSAndUpdate,
+  findNodeByIdDFSAndDelete,
   testBFS,
   buildTree
 };
