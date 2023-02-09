@@ -23,14 +23,12 @@ const renderNodeWithCustomEvents = ({ nodeDatum, toggleNode, handleClick }) => {
 
 const D3Tree = () => {
   const { goalId } = useParams();
-  const {
-    isLoading,
-    error,
-    data: tree
-  } = useQuery({
+  const { isLoading, error, data } = useQuery({
     queryKey: ['treeData', goalId],
     queryFn: () => queryFunctions.findGoal(goalId)
   });
+
+  const tree = data.insertionNode;
 
   const navigate = useNavigate();
 

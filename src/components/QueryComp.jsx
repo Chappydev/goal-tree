@@ -56,7 +56,7 @@ const QueryComp = () => {
       <Route path="/" element={<D3Tree />} />
       <Route
         path="/task/:id"
-        element={<TaskView tree={data} mutations={mutations} />}
+        element={<TaskView tree={data.insertionNode} mutations={mutations} />}
       />
     </Routes>
   );

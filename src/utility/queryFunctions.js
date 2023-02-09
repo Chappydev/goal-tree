@@ -2,13 +2,26 @@ import { getStoredUser } from './localUserFunctions';
 
 const baseUrl = 'http://localhost:3001/api/';
 
-// TODO: change so you can choose which goal to fetch
 const findGoal = async (id) => {
-  const response = await fetch(baseUrl + `goals/${id}`);
-  if (!response.ok) {
-    throw new Error(response.body.error ?? '');
+  const user = getStoredUser();
+
+  if (!user) {
+    throw new Error({ error: 'Not currently logged in' });
   }
-  return await response.json();
+
+  try {
+    const response = await fetch(baseUrl + `goals/${id}`, {
+      headers: {
+        Authorization: `Bearer ${user.token}`
+      }
+    });
+    if (!response.ok) {
+      throw new Error(response.error ?? '');
+    }
+    return await response.json();
+  } catch (error) {
+    throw new Error(error);
+  }
 };
 
 const createGoal = async (name) => {
