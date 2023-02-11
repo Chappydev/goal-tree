@@ -121,7 +121,6 @@ const findNodeByIdDFSAndDelete = (node, id) => {
   if (!node) {
     return false;
   }
-  console.log(id);
 
   const nodeCopy = structuredClone(node);
 
