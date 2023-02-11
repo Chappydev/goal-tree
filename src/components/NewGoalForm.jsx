@@ -12,7 +12,7 @@ const NewGoalForm = ({ handleClose }) => {
 
   const addGoal = useMutation({
     mutationFn: (name) => {
-      queryFunctions.createGoal(name);
+      return queryFunctions.createGoal(name);
     }, // No optimistic updates because we can't have links to nonexistent pages
     onSuccess: () => {
       queryClient.invalidateQueries(['goalsOverview']);
