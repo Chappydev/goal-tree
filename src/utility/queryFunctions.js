@@ -2,6 +2,25 @@ import { getStoredUser } from './localUserFunctions';
 
 const baseUrl = 'http://localhost:3001/api/';
 
+const checkUsername = async (username, signal) => {
+  try {
+    const response = await fetch(
+      baseUrl + `users/exists?username=${username}`,
+      {
+        signal
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error(response.error);
+    }
+
+    return await response.json();
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
 const findGoal = async (id) => {
   const user = getStoredUser();
 
@@ -136,6 +155,7 @@ const insertNode = async (nodeName, parentId, insertInd) => {
 };
 
 export default {
+  checkUsername,
   findGoal,
   createGoal,
   findOverview,
