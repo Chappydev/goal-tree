@@ -66,3 +66,14 @@
     @include fill(true, $main, $text);
   }
 }
+
+.delete {
+  $main: c.$red;
+  $text: c.$white;
+  &.none {
+    @include fill(false, $main, $text);
+  }
+  &.fill {
+    @include fill(true, $main, $text);
+  }
+}
