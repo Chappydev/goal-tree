@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useMatch } from 'react-router-dom';
 import Modal from './Modal';
 import useModal from '../hooks/useModal';
 import './Navbar.scss';
@@ -11,6 +11,8 @@ import SignUpForm from './SignUpForm';
 import { useLogout, useUser } from '../hooks/authHooks';
 
 const Navbar = () => {
+  const isTaskView = useMatch('/goal/:id/task/:id');
+  console.log(isTaskView);
   const [goalFormIsShown, openGoalModal, closeGoalModal] = useModal(false);
   const [loginFormIsShown, openLoginModal, closeLoginModal] = useModal(false);
   const [useSignUp, setUseSignUp] = useState(true);
@@ -24,8 +26,13 @@ const Navbar = () => {
       Task App!
       <div className="navigation">
         <NavLink to="/goals">
-          <button>Goal Overview</button>
+          <Button>Goal Overview</Button>
         </NavLink>
+        {isTaskView && (
+          <NavLink to="../.." relative="path">
+            <Button>Tree View</Button>
+          </NavLink>
+        )}
       </div>
       <div className="actions">
         {isSuccess && user ? (
