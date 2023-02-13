@@ -3,4 +3,10 @@
 .App {
   background-color: c.$bg;
   color: c.$text;
+  a {
+    color: inherit;
+    &:active {
+      opacity: 90%;
+    }
+  }
 }
