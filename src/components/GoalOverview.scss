@@ -3,6 +3,13 @@
   border-bottom: 1px solid black;
 }
 
+.overview-top-container {
+  display: flex;
+  > button {
+    margin-left: auto;
+  }
+}
+
 .current-container {
   display: flex;
   align-items: center;
@@ -15,5 +22,8 @@
   }
 
   height: 100%;
+}
+
+.layer-index {
   margin-left: auto;
 }

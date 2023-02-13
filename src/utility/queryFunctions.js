@@ -67,6 +67,24 @@ const createGoal = async (name) => {
   return await response.json();
 };
 
+const deleteGoal = async (id) => {
+  const user = getStoredUser();
+
+  if (!user) {
+    throw new Error({ error: 'Not currently logged in' });
+  }
+
+  const response = await fetch(baseUrl + `goals/${id}`, {
+    method: 'DELETE',
+    headers: {
+      Authorization: `Bearer ${user.token}`
+    }
+  });
+  if (!response.ok) {
+    throw new Error(response.error);
+  }
+};
+
 const findOverview = async () => {
   const user = getStoredUser();
 
@@ -158,6 +176,7 @@ export default {
   checkUsername,
   findGoal,
   createGoal,
+  deleteGoal,
   findOverview,
   updateNode,
   deleteNode,

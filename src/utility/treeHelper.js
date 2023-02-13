@@ -52,14 +52,25 @@ const findBroadestLayer = (tree) => {
   return broadestLayer;
 };
 
-const findNodeById = (tree, id) => {
-  const testNode = {
-    id: 12,
-    name: 'sing more',
-    children: []
-  };
+const getOneLayer = (nodeList) => {
+  // Creates array from all the arrays of children and then flattens it out
+  const layer = nodeList.flatMap((node) => node.children);
+  return layer;
+};
 
-  return testNode;
+const getLayersHelper = (nodeList, layers) => {
+  if (nodeList.length < 1) return layers;
+
+  const nextLayer = getOneLayer(nodeList);
+  if (nextLayer.length > 0) {
+    layers.push(nextLayer);
+  }
+  return getLayersHelper(nextLayer, layers);
+};
+
+const getLayers = (tree) => {
+  const layers = getLayersHelper([tree], []);
+  return layers;
 };
 
 const findNodeByIdBFS = (node, id) => {
@@ -255,6 +266,7 @@ const buildTree = ({ insertionNodeId, nodes }) => {
 export default {
   findDeepestLayer,
   findBroadestLayer,
+  getLayers,
   findNodeByIdBFS,
   findFamilyByIdBFS,
   findNodeByIdDFSAndUpdate,

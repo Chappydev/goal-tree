@@ -1,47 +1,58 @@
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import React from 'react';
 import { useState } from 'react';
-import { ArrowDown, ArrowUp } from 'react-feather';
+import { ArrowDown, ArrowUp, Trash, Trash2 } from 'react-feather';
 import { NavLink } from 'react-router-dom';
+import useTreeLayer from '../hooks/useTreeLayer';
+import queryFunctions from '../utility/queryFunctions';
 import treeHelper from '../utility/treeHelper';
+import Button from './Button';
 import './GoalOverview.scss';
 
 const GoalOverview = ({ goalData }) => {
-  const goalDepth = treeHelper.findDeepestLayer(goalData.insertionNode);
-  const [layer, setLayer] = useState(goalDepth);
+  const { layer, layerInd, setToNextLayer, setToPrevLayer } = useTreeLayer(
+    goalData.insertionNode
+  );
+  const queryClient = useQueryClient();
+
+  const removeGoal = useMutation({
+    mutationKey: ['treeData', goalData.id],
+    mutationFn: () => queryFunctions.deleteGoal(goalData.id),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['treeData', goalData.id] });
+      queryClient.invalidateQueries({ queryKey: ['goalsOverview'] });
+    }
+  });
 
   return (
     <div className="overview-container">
-      <NavLink to={`/goal/${goalData.id}`}>
-        <h2>{goalData.insertionNode.name}</h2>
-      </NavLink>
+      <div className="overview-top-container">
+        <NavLink to={`/goal/${goalData.id}`}>
+          <h2>{goalData.insertionNode.name}</h2>
+        </NavLink>
+        <Button
+          fillType="fill"
+          color="delete"
+          onClick={() => removeGoal.mutate()}
+        >
+          Delete
+        </Button>
+      </div>
       <div className="current-container">
-        {/* 
-        // TODO: redo this to better suit the new data
-        // TODO: maybe add helper function to navigate the tree
-        <p>
+        <div>
           {'Current: '}
-          <NavLink
-            to={`/goal/${goalData.id}/task/${goalData.incompleteNodes[ind].id}`}
-          >
-            {goalData.incompleteNodes[ind].name}
-          </NavLink>
-        </p>
+          {layer &&
+            layer.map((node) => (
+              <NavLink to={`/goal/${goalData.id}/task/${node.id}`}>
+                {node.name}
+              </NavLink>
+            ))}
+        </div>
+        <div className="layer-index">{layerInd + 1}</div>
         <div className="arrows-container">
-          <ArrowUp
-            onClick={() =>
-              ind > 0
-                ? setInd(ind - 1)
-                : setInd(goalData.incompleteNodes.length - 1)
-            }
-          />
-          <ArrowDown
-            onClick={() =>
-              ind < goalData.incompleteNodes.length - 1
-                ? setInd(ind + 1)
-                : setInd(0)
-            }
-          />
-        </div> */}
+          <ArrowUp role="button" onClick={setToPrevLayer} />
+          <ArrowDown role="button" onClick={setToNextLayer} />
+        </div>
       </div>
     </div>
   );
