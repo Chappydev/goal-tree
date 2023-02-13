@@ -39,8 +39,8 @@ const GoalOverview = ({ goalData }) => {
         </Button>
       </div>
       <div className="current-container">
-        <div>
-          {'Current: '}
+        <div>{'Current: '}</div>
+        <div className="nodes-wrapper">
           {layer &&
             layer.map((node) => (
               <NavLink to={`/goal/${goalData.id}/task/${node.id}`}>

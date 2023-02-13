@@ -12,10 +12,23 @@
 
 .current-container {
   display: flex;
+  gap: 0.7em;
   align-items: center;
 }
 
+.nodes-wrapper {
+  display: flex;
+  gap: 0.5em;
+  // change to overflow hidden and add arrow scrolling
+  overflow-x: scroll;
+  white-space: nowrap;
+  > a {
+    flex: 0 0 auto;
+  }
+}
+
 .arrows-container {
+  flex: none;
   > * {
     display: block;
     height: auto;
