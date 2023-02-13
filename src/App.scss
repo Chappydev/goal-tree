@@ -4,12 +4,12 @@
   background-color: c.$bg;
   color: c.$text;
   a {
-    color: c.$primary-light;
+    color: rgba(c.$primary-light, 1);
     &:hover {
-      opacity: 90%;
+      color: rgba(c.$primary-light, 0.9);
     }
     &:active {
-      opacity: 80%;
+      color: rgba(c.$primary-light, 0.8);
     }
   }
 }
