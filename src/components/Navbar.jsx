@@ -23,7 +23,7 @@ const Navbar = () => {
 
   return (
     <div className="navbar">
-      Task App!
+      <div className="app-name">Task App!</div>
       <div className="navigation">
         <NavLink to="/goals">
           <Button>Goal Overview</Button>
