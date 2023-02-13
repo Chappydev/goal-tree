@@ -8,6 +8,9 @@ const useTreeLayer = (tree) => {
   const [layer, setLayer] = useState(layers[layerInd]);
 
   const setToNextLayer = () => {
+    if (layers.length === 0) {
+      return;
+    }
     if (layerInd === layers.length - 1) {
       setLayerInd(0);
     } else {
@@ -16,6 +19,9 @@ const useTreeLayer = (tree) => {
   };
 
   const setToPrevLayer = () => {
+    if (layers.length === 0) {
+      return;
+    }
     if (layerInd === 0) {
       setLayerInd(layers.length - 1);
     } else {
