@@ -4,7 +4,7 @@ import {
   setStoredUser
 } from './localUserFunctions';
 
-const baseUrl = 'http://localhost:3001/api/';
+const baseUrl = '/api/';
 
 const getUser = async () => {
   const storedUser = getStoredUser();

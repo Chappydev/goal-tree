@@ -1,6 +1,6 @@
 import { getStoredUser } from './localUserFunctions';
 
-const baseUrl = 'http://localhost:3001/api/';
+const baseUrl = '/api/';
 
 const checkUsername = async (username, signal) => {
   try {
