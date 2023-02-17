@@ -1,6 +1,9 @@
 @use 'partials/colors' as c;
 
 .App {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
   background-color: c.$bg;
   color: c.$text;
   a {
@@ -12,4 +15,8 @@
       color: rgba(c.$primary-light, 0.8);
     }
   }
+}
+
+.app-content-wrapper {
+  flex: 1 0 0;
 }

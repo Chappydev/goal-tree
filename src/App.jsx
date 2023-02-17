@@ -8,24 +8,21 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
 const queryClient = new QueryClient();
 
-const fillWindow = {
-  height: '100%',
-  width: '100%'
-};
-
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <div className="App" style={fillWindow}>
+      <div className="App">
         <Navbar />
-        <AuthLoader
-          renderLoading={() => <div>User Loading...</div>}
-          renderUnauthenticated={() => (
-            <div>Unauthenticated: Login or Sign Up first</div>
-          )}
-        >
-          <Paths />
-        </AuthLoader>
+        <div className="app-content-wrapper">
+          <AuthLoader
+            renderLoading={() => <div>User Loading...</div>}
+            renderUnauthenticated={() => (
+              <div>Unauthenticated: Login or Sign Up first</div>
+            )}
+          >
+            <Paths />
+          </AuthLoader>
+        </div>
       </div>
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
