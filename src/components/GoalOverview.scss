@@ -1,4 +1,7 @@
 .overview-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7em;
   width: 100%;
   max-width: 1600px;
   padding: 1em 3vw;
