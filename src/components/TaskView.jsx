@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { ChevronLeft, ChevronRight, ChevronUp } from 'react-feather';
 import { NavLink, useParams } from 'react-router-dom';
 import useModal from '../hooks/useModal';
 import treeHelper from '../utility/treeHelper';
@@ -17,32 +18,42 @@ const TaskView = ({ goal, mutations }) => {
     useModal();
   const [addIsShown, addHandleOpen, addHandleClose, addFormNode] = useModal();
 
+  const arrowProps = {
+    size: 30
+  };
+
   // TODO: Fix lines going over other nodes
   return (
     <div id="task-view-container">
       {family.prevSibling ? (
         <NavLink to={`../task/${family.prevSibling.id}`} className="left-arrow">
-          &lt;
+          <ChevronLeft {...arrowProps} />
         </NavLink>
       ) : (
-        <div className="left-arrow">&lt;</div>
+        <div className="left-arrow disabled">
+          <ChevronLeft {...arrowProps} />
+        </div>
       )}
       {family.parent ? (
         <NavLink to={`../task/${family.parent.id}`} className="top-arrow">
-          ^
+          <ChevronUp {...arrowProps} />
         </NavLink>
       ) : (
-        <div className="top-arrow">^</div>
+        <div className="top-arrow disabled">
+          <ChevronUp {...arrowProps} />
+        </div>
       )}
       {family.nextSibling ? (
         <NavLink
           to={`../task/${family.nextSibling.id}`}
           className="right-arrow"
         >
-          &gt;
+          <ChevronRight {...arrowProps} />
         </NavLink>
       ) : (
-        <div className="right-arrow">&gt;</div>
+        <div className="right-arrow disabled">
+          <ChevronRight {...arrowProps} />
+        </div>
       )}
       <div id="content">
         <div id="current-node">
