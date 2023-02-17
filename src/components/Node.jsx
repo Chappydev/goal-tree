@@ -66,6 +66,8 @@ const Node = ({
       </div>
     );
   }
+
+  // TODO: Fix lines going over other nodes
   return (
     <div className="child-node node-container">
       <div className="node-options">

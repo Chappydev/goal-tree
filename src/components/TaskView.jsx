@@ -17,6 +17,7 @@ const TaskView = ({ goal, mutations }) => {
     useModal();
   const [addIsShown, addHandleOpen, addHandleClose, addFormNode] = useModal();
 
+  // TODO: Fix lines going over other nodes
   return (
     <div id="task-view-container">
       {family.prevSibling ? (
@@ -44,20 +45,6 @@ const TaskView = ({ goal, mutations }) => {
         <div className="right-arrow">&gt;</div>
       )}
       <div id="content">
-        {/* <div id="current-node">{family.currentNode.name}</div>
-        <div id="children">
-          {family.children.map((child) => {
-            return (
-              <NavLink
-                to={`/task/${child.id}`}
-                className="child-task"
-                key={child.id}
-              >
-                {child.name}
-              </NavLink>
-            );
-          })}
-        </div> */}
         <div id="current-node">
           <Node
             node={family.currentNode}
