@@ -9,6 +9,7 @@
     "preview": "vite preview",
     "server": "json-server --watch db.json"
   },
+  "proxy": "http://localhost:3001",
   "dependencies": {
     "@tanstack/react-query": "^4.24.4",
     "@tanstack/react-query-devtools": "^4.24.4",
