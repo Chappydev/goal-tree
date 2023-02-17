@@ -3,6 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 import { NavLink } from 'react-router-dom';
 import queryFunctions from '../utility/queryFunctions';
 import GoalOverview from './GoalOverview';
+import './CurrentView.scss';
 
 const testGoalData = [
   {
@@ -145,7 +146,7 @@ const CurrentView = () => {
   }
 
   return (
-    <div>
+    <div className="current-view">
       {data.map((goalData) => (
         <GoalOverview key={goalData.id} goalData={goalData} />
       ))}
