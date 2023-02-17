@@ -3,7 +3,6 @@ import treeHelper from '../utility/treeHelper';
 
 const useTreeLayer = (tree) => {
   const layers = treeHelper.getLayers(tree);
-  console.log(layers);
   const [layerInd, setLayerInd] = useState(0);
   const [layer, setLayer] = useState(layers[layerInd]);
 
