@@ -43,7 +43,10 @@ const GoalOverview = ({ goalData }) => {
         <div className="nodes-wrapper">
           {layer &&
             layer.map((node) => (
-              <NavLink to={`/goal/${goalData.id}/task/${node.id}`}>
+              <NavLink
+                key={node.id}
+                to={`/goal/${goalData.id}/task/${node.id}`}
+              >
                 {node.name}
               </NavLink>
             ))}
