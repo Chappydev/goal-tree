@@ -16,11 +16,11 @@ const Navbar = () => {
   const [goalFormIsShown, openGoalModal, closeGoalModal] = useModal(false);
   const [loginFormIsShown, openLoginModal, closeLoginModal] = useModal(false);
   const [useSignUp, setUseSignUp] = useState(true);
-  // NOTE: this state is temporary and should later be based
-  //       on the user object.
   const { isSuccess, data: user } = useUser();
   const logout = useLogout();
 
+  // TODO: Remove navigation and maybe also login/logout
+  //       on smaller screen sizes and move to bottom menu bar
   return (
     <div className="navbar">
       <div className="app-name">Task App!</div>
