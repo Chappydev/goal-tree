@@ -1,5 +1,7 @@
 .overview-container {
-  padding: 1em 2em;
+  width: 100%;
+  max-width: 1600px;
+  padding: 1em 3vw;
   border-bottom: 1px solid black;
 }
 
@@ -19,8 +21,8 @@
 .nodes-wrapper {
   display: flex;
   gap: 0.5em;
-  // change to overflow hidden and add arrow scrolling
-  overflow-x: scroll;
+  // TODO: change to overflow hidden and add arrow scrolling
+  overflow-x: auto;
   white-space: nowrap;
   > a {
     flex: 0 0 auto;
