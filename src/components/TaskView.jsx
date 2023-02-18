@@ -1,3 +1,4 @@
+import { atom } from 'jotai';
 import React, { useState } from 'react';
 import { ChevronLeft, ChevronRight, ChevronUp } from 'react-feather';
 import { NavLink, useParams } from 'react-router-dom';
@@ -9,14 +10,24 @@ import NewNodeForm from './NewNodeForm';
 import Node from './Node';
 import './TaskView.scss';
 
+export const editIsShownAtom = atom(false);
+export const addIsShownAtom = atom(false);
+export const editNodeAtom = atom(null);
+export const addNodeAtom = atom(null);
+
 const TaskView = ({ goal, mutations }) => {
   const tree = goal.insertionNode;
   const { id } = useParams();
   const family = treeHelper.findFamilyByIdBFS(tree, id);
   const [rect, setRect] = useState(null);
-  const [editIsShown, editHandleOpen, editHandleClose, editFormNode] =
-    useModal();
-  const [addIsShown, addHandleOpen, addHandleClose, addFormNode] = useModal();
+  const [editIsShown, editHandleOpen, editHandleClose] = useModal(
+    editIsShownAtom,
+    editNodeAtom
+  );
+  const [addIsShown, addHandleOpen, addHandleClose] = useModal(
+    addIsShownAtom,
+    addNodeAtom
+  );
 
   const arrowProps = {
     size: 30
@@ -86,18 +97,10 @@ const TaskView = ({ goal, mutations }) => {
         </div>
       </div>
       <Modal handleClose={editHandleClose} isShown={editIsShown}>
-        <EditForm
-          node={editFormNode}
-          handleClose={editHandleClose}
-          goalId={goal.id}
-        />
+        <EditForm handleClose={editHandleClose} goalId={goal.id} />
       </Modal>
       <Modal handleClose={addHandleClose} isShown={addIsShown}>
-        <NewNodeForm
-          node={addFormNode}
-          handleClose={addHandleClose}
-          goalId={goal.id}
-        />
+        <NewNodeForm handleClose={addHandleClose} goalId={goal.id} />
       </Modal>
     </div>
   );

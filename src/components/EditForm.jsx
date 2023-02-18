@@ -6,8 +6,11 @@ import queryFunctions from '../utility/queryFunctions';
 import Button from './Button';
 import TextInput from './TextInput';
 import treeHelper from '../utility/treeHelper';
+import { useAtomValue } from 'jotai';
+import { editNodeAtom } from './TaskView';
 
-const EditForm = ({ node, handleClose, goalId }) => {
+const EditForm = ({ handleClose, goalId }) => {
+  const node = useAtomValue(editNodeAtom);
   const [name, setName] = useState(node?.name ? node.name : '');
   const queryClient = useQueryClient();
 

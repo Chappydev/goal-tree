@@ -8,8 +8,11 @@ import TextInput from './TextInput';
 import NumberInput from './NumberInput';
 import { generateId } from '../utility/miscFunctions';
 import treeHelper from '../utility/treeHelper';
+import { useAtomValue } from 'jotai';
+import { addNodeAtom } from './TaskView';
 
-const NewNodeForm = ({ node, handleClose, goalId }) => {
+const NewNodeForm = ({ handleClose, goalId }) => {
+  const node = useAtomValue(addNodeAtom);
   const [name, setName] = useState('');
   const [ind, setInd] = useState(node ? node.children.length + 1 : 1);
   const queryClient = useQueryClient();
