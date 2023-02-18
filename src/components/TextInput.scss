@@ -1,6 +1,7 @@
 @use '../partials/inputs';
 
-input[type='text'] {
+input[type='text'],
+input[type='password'] {
   border-radius: 0.2em;
   padding: 0.2em 0.5em;
 }
