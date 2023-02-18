@@ -9,13 +9,21 @@ import { useState } from 'react';
 import LoginForm from './LoginForm';
 import SignUpForm from './SignUpForm';
 import { useLogout, useUser } from '../hooks/authHooks';
+import { atom, useAtom } from 'jotai';
+
+export const goalFormIsShownAtom = atom(false);
+export const loginSignupFormIsShownAtom = atom(false);
+export const signUpLoginAtom = atom(true);
 
 const Navbar = () => {
   const isTaskView = useMatch('/goal/:id/task/:id');
   console.log(isTaskView);
-  const [goalFormIsShown, openGoalModal, closeGoalModal] = useModal(false);
-  const [loginFormIsShown, openLoginModal, closeLoginModal] = useModal(false);
-  const [useSignUp, setUseSignUp] = useState(true);
+  const [goalFormIsShown, openGoalModal, closeGoalModal] =
+    useModal(goalFormIsShownAtom);
+  const [loginFormIsShown, openLoginModal, closeLoginModal] = useModal(
+    loginSignupFormIsShownAtom
+  );
+  const [useSignUp, setUseSignUp] = useAtom(signUpLoginAtom);
   const { isSuccess, data: user } = useUser();
   const logout = useLogout();
 

@@ -12,6 +12,7 @@
   "dependencies": {
     "@tanstack/react-query": "^4.24.4",
     "@tanstack/react-query-devtools": "^4.24.4",
+    "jotai": "^2.0.2",
     "react": "^18.2.0",
     "react-d3-tree": "^3.5.0",
     "react-dom": "^18.2.0",
