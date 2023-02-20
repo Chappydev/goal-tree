@@ -15,7 +15,7 @@ const Line = ({ x1, y1, x2, y2, delayMult = 1, isComplete }) => {
   const svgWidth = Math.round(Math.abs(x2 - x1));
   const svgStyle = {
     height: svgHeight,
-    width: svgWidth || 2
+    width: Math.max(svgWidth, 2)
   };
 
   const directionObj =
