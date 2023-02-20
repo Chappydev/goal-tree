@@ -12,9 +12,21 @@
 }
 
 .navigation {
+  display: flex;
+  align-items: center;
   margin-left: 1em;
+  a {
+    text-decoration: none;
+  }
 }
 
 .actions {
+  display: flex;
+  align-items: center;
   margin-left: auto;
+}
+
+.nav-button-svg {
+  max-width: 100%;
+  height: 100%;
 }

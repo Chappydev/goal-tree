@@ -5,11 +5,13 @@ import useModal from '../hooks/useModal';
 import './Navbar.scss';
 import NewGoalForm from './NewGoalForm';
 import Button from './Button';
-import { useState } from 'react';
 import LoginForm from './LoginForm';
 import SignUpForm from './SignUpForm';
 import { useLogout, useUser } from '../hooks/authHooks';
 import { atom, useAtom } from 'jotai';
+import { useMediaQuery } from 'react-responsive';
+import { CheckCircle, List, LogOut, Plus } from 'react-feather';
+import { useQueryClient } from '@tanstack/react-query';
 
 export const goalFormIsShownAtom = atom(false);
 export const loginSignupFormIsShownAtom = atom(false);
@@ -24,7 +26,15 @@ const Navbar = () => {
   );
   const [useSignUp, setUseSignUp] = useAtom(signUpLoginAtom);
   const { isSuccess, data: user } = useUser();
+  console.log(isSuccess, user);
+  const queryClient = useQueryClient();
   const logout = useLogout();
+  // const logout = useLogout({
+  //   onSuccess: () => queryClient.invalidateQueries(['authenticated-user'])
+  // });
+
+  const isSmallScreen = useMediaQuery({ query: '(max-width: 550px)' });
+  const isXSmallScreen = useMediaQuery({ query: '(max-width: 400px)' });
 
   // TODO: Remove navigation and maybe also login/logout
   //       on smaller screen sizes and move to bottom menu bar
@@ -33,20 +43,30 @@ const Navbar = () => {
       <div className="app-name">Task App!</div>
       <div className="navigation">
         <NavLink to="/goals">
-          <Button>Goal Overview</Button>
+          <Button>
+            {isXSmallScreen ? <List className="nav-button-svg" /> : 'My Goals'}
+          </Button>
         </NavLink>
         {isTaskView && (
           <NavLink to="../.." relative="path">
-            <Button>Tree View</Button>
+            <Button>
+              {isXSmallScreen ? (
+                <CheckCircle className="nav-button-svg" />
+              ) : (
+                'Tree View'
+              )}
+            </Button>
           </NavLink>
         )}
       </div>
       <div className="actions">
         {isSuccess && user ? (
           <>
-            <Button onClick={() => logout.mutate()}>Logout</Button>
+            <Button onClick={() => logout.mutate()}>
+              {isSmallScreen ? <LogOut className="nav-button-svg" /> : 'Logout'}
+            </Button>
             <Button onClick={openGoalModal} fillType="fill" color="accent">
-              New Goal
+              {isSmallScreen ? <Plus className="nav-button-svg" /> : 'New Goal'}
             </Button>
           </>
         ) : (
