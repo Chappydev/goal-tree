@@ -10,7 +10,7 @@ const getUser = async () => {
   const storedUser = getStoredUser();
 
   if (!storedUser) {
-    return null;
+    return new Promise((resolve, reject) => resolve(null));
   }
 
   const response = await fetch(baseUrl + `users/${storedUser.id}`, {
