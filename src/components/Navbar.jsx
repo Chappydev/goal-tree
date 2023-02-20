@@ -17,7 +17,6 @@ export const signUpLoginAtom = atom(true);
 
 const Navbar = () => {
   const isTaskView = useMatch('/goal/:id/task/:id');
-  console.log(isTaskView);
   const [goalFormIsShown, openGoalModal, closeGoalModal] =
     useModal(goalFormIsShownAtom);
   const [loginFormIsShown, openLoginModal, closeLoginModal] = useModal(
