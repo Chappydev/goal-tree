@@ -1,14 +1,18 @@
 import React, { useState } from 'react';
 import './EditForm.scss';
-import { useEffect } from 'react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import queryFunctions from '../utility/queryFunctions';
 import Button from './Button';
 import TextInput from './TextInput';
+import { atom } from 'jotai';
+import { useNavigate } from 'react-router-dom';
+
+export const goalFormIsShown = atom(false);
 
 const NewGoalForm = ({ handleClose }) => {
   const [name, setName] = useState('');
   const queryClient = useQueryClient();
+  const navigate = useNavigate();
 
   const addGoal = useMutation({
     mutationFn: (name) => {
@@ -24,6 +28,7 @@ const NewGoalForm = ({ handleClose }) => {
     addGoal.mutate(name);
     setName('');
     handleClose();
+    navigate('/goals');
   };
 
   return (

@@ -1,5 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useLogin } from '../hooks/authHooks';
 import { setStoredUser } from '../utility/localUserFunctions';
 import Button from './Button';
@@ -9,6 +10,7 @@ const LoginForm = ({ handleClose, setUseSignUp }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const login = useLogin();
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -20,6 +22,7 @@ const LoginForm = ({ handleClose, setUseSignUp }) => {
           setStoredUser(user);
           setUsername('');
           handleClose();
+          navigate('/goals');
         },
         onSettled: () => {
           setPassword('');

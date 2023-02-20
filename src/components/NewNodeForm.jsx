@@ -10,12 +10,14 @@ import { generateId } from '../utility/miscFunctions';
 import treeHelper from '../utility/treeHelper';
 import { useAtomValue } from 'jotai';
 import { addNodeAtom } from './TaskView';
+import { useNavigate } from 'react-router-dom';
 
 const NewNodeForm = ({ handleClose, goalId }) => {
   const node = useAtomValue(addNodeAtom);
   const [name, setName] = useState('');
   const [ind, setInd] = useState(node ? node.children.length + 1 : 1);
   const queryClient = useQueryClient();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (node) {
@@ -67,6 +69,7 @@ const NewNodeForm = ({ handleClose, goalId }) => {
     addNode.mutate({ name, parentId: node.id, insertInd: ind - 1 });
     setName('');
     handleClose();
+    navigate(`../task/${node.id}`);
   };
 
   const handleChange = (e) => {

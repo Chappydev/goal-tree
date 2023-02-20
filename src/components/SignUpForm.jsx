@@ -2,6 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import React from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useLogin, useRegister } from '../hooks/authHooks';
 import useDebounceValue from '../hooks/useDebounceValue';
 import queryFunctions from '../utility/queryFunctions';
@@ -17,6 +18,7 @@ const SignUpForm = ({ handleClose, setUseSignUp }) => {
   const [showAvailableNotif, setShowAvailableNotif] = useState(false);
   const register = useRegister();
   const login = useLogin();
+  const navigate = useNavigate();
 
   const {
     isLoading,
@@ -52,6 +54,7 @@ const SignUpForm = ({ handleClose, setUseSignUp }) => {
       setUsername('');
       setPassword('');
       handleClose();
+      navigate('/goals');
     } catch (error) {
       console.error(error);
     }
