@@ -26,8 +26,7 @@ const Navbar = () => {
   );
   const [useSignUp, setUseSignUp] = useAtom(signUpLoginAtom);
   const { isSuccess, data: user } = useUser();
-  console.log(isSuccess, user);
-  const queryClient = useQueryClient();
+  // const queryClient = useQueryClient();
   const logout = useLogout();
   // const logout = useLogout({
   //   onSuccess: () => queryClient.invalidateQueries(['authenticated-user'])
