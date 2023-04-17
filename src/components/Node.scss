@@ -103,12 +103,19 @@ $node-bradius: 20px;
   .hidden-relative-box {
     width: 100%;
     height: 100%;
+    padding: 0.4em;
     position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
     background-color: $box-bgcolor;
     border-radius: $node-bradius;
+    overflow: hidden;
+    > span {
+      max-height: 100%;
+      max-width: 100%;
+      overflow-wrap: break-word;
+    }
     z-index: 1;
     .complete-color {
       position: absolute;
