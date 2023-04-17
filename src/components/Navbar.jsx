@@ -39,7 +39,7 @@ const Navbar = () => {
   //       on smaller screen sizes and move to bottom menu bar
   return (
     <div className="navbar">
-      <div className="app-name">Task App!</div>
+      <div className="app-name">GoalTree!</div>
       <div className="navigation">
         <NavLink to="/goals">
           <Button>
