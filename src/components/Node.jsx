@@ -60,7 +60,7 @@ const Node = ({
         <NavLink to={`../task/${node.id}`} className="node" ref={currNodeRef}>
           <div className="hidden-relative-box">
             <div className="complete-color" style={sizeObj}></div>
-            {node.name}
+            <span>{node.name}</span>
           </div>
         </NavLink>
       </div>
