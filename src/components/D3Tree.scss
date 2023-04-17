@@ -21,3 +21,9 @@
     stroke: c.$green;
   }
 }
+
+.tree-node-text {
+  max-height: 100%;
+  max-width: 100%;
+  overflow-wrap: break-word;
+}

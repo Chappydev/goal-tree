@@ -14,9 +14,12 @@ const renderNodeWithCustomEvents = ({ nodeDatum, toggleNode, handleClick }) => {
         r="20"
         onClick={() => handleClick(nodeDatum)}
       />
-      <text className="node-name" x="25" y="4" onClick={toggleNode}>
+      {/* <text className="node-name" x="25" y="4" onClick={toggleNode}>
         {nodeDatum.name}
-      </text>
+      </text> */}
+      <foreignObject width="90" height="100" x="25">
+        <span className="tree-node-text">{nodeDatum.name}</span>
+      </foreignObject>
     </g>
   );
 };
