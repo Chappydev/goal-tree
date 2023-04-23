@@ -7,7 +7,8 @@ const Paths = () => {
   return (
     <Routes>
       <Route path="/goal/:goalId/*" element={<QueryComp />} />
-      <Route path="/goals" element={<CurrentView />} />
+      <Route path={'/goals'} element={<CurrentView />} />
+      <Route path={'/'} element={<CurrentView />} />
     </Routes>
   );
 };
