@@ -1,3 +1,5 @@
+@use '../partials/colors' as c;
+
 .unauthenticated-container {
   height: 100%;
   width: 100%;
@@ -8,8 +10,50 @@
   align-items: center;
 }
 
+.unauthenticated-getstarted {
+  display: flex;
+  justify-content: center;
+  gap: 3rem;
+  .getstarted-option {
+    flex: 0 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    width: 250px;
+    padding: 1em;
+    background-color: c.$bg-light;
+    border-radius: 1rem;
+    overflow: hidden;
+    > h4 {
+      font-size: 1.15rem;
+    }
+
+    > svg {
+      margin-top: auto;
+      align-self: end;
+    }
+    &:hover > svg {
+      animation: 1.3s ease-in-out 0s infinite thisWaySir;
+    }
+  }
+}
+
 .unauthenticated-content {
   > button {
     margin: 0 0.3em;
+  }
+}
+
+.unauthenticated-description {
+  text-align: center;
+}
+
+@keyframes thisWaySir {
+  0% {
+    transform: translateX(0px);
+  }
+
+  50% {
+    transform: translateX(10px);
   }
 }
