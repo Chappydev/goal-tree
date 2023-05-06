@@ -6,7 +6,9 @@
   flex-direction: column;
   background-color: c.$bg;
   color: c.$text;
-  a {
+  a,
+  .transparent-text-transition {
+    transition: color 0.2s ease-out;
     color: rgba(c.$primary-light, 1);
     &:hover {
       color: rgba(c.$primary-light, 0.9);
