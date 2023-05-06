@@ -13,35 +13,52 @@
 .unauthenticated-getstarted {
   display: flex;
   justify-content: center;
+  align-items: stretch;
   gap: 3rem;
-  .getstarted-option {
+
+  .getstarted-option-wrapper {
     flex: 0 0 auto;
+    width: 250px;
+    border-radius: 1rem;
+    background-color: c.$bg-light;
+    overflow: hidden;
+  }
+
+  .getstarted-option {
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
-    width: 250px;
+    justify-content: space-between;
+    gap: 0.4rem;
+    width: 100%;
+    height: 100%;
     padding: 1em;
-    background-color: c.$bg-light;
-    border-radius: 1rem;
-    overflow: hidden;
-    > h4 {
+    background-color: inherit;
+    color: inherit;
+    text-align: left;
+    cursor: pointer;
+
+    > div {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    h4 {
       font-size: 1.15rem;
     }
 
     > svg {
-      margin-top: auto;
       align-self: end;
     }
+
     &:hover > svg {
       animation: 1.3s ease-in-out 0s infinite thisWaySir;
     }
   }
 }
 
-.unauthenticated-content {
-  > button {
-    margin: 0 0.3em;
-  }
+.unauthenticated-demo-link {
+  text-decoration: none;
 }
 
 .unauthenticated-description {
