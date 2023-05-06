@@ -1,59 +1,84 @@
 @use '../partials/colors' as c;
+@use '../partials/breakpoints' as b;
 
 .unauthenticated-container {
   height: 100%;
   width: 100%;
+  padding: 2rem;
   display: flex;
   flex-direction: column;
-  gap: 0.3em;
+  gap: 1em;
   justify-content: center;
   align-items: center;
+  text-align: center;
+
+  h1 {
+    font-size: 2.4rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .getstarted-header {
+    margin-top: 1.5rem;
+  }
+
+  > p {
+    max-width: 900px;
+  }
 }
 
 .unauthenticated-getstarted {
-  display: flex;
-  justify-content: center;
-  align-items: stretch;
-  gap: 3rem;
-
   .getstarted-option-wrapper {
-    flex: 0 0 auto;
-    width: 250px;
-    border-radius: 1rem;
-    background-color: c.$bg-light;
-    overflow: hidden;
+    margin-bottom: 1rem;
   }
 
-  .getstarted-option {
+  @media screen and (min-width: b.$sm) {
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    gap: 3rem;
+    .getstarted-option-wrapper {
+      margin-bottom: 0;
+    }
+  }
+}
+
+.getstarted-option-wrapper {
+  flex: 0 0 auto;
+  width: 250px;
+  border-radius: 1rem;
+  background-color: c.$bg-light;
+  overflow: hidden;
+}
+
+.getstarted-option {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 0.4rem;
+  width: 100%;
+  height: 100%;
+  padding: 1em;
+  background-color: inherit;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+
+  > div {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    gap: 0.4rem;
-    width: 100%;
-    height: 100%;
-    padding: 1em;
-    background-color: inherit;
-    color: inherit;
-    text-align: left;
-    cursor: pointer;
+    gap: 0.5rem;
+  }
 
-    > div {
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-    }
+  h4 {
+    font-size: 1.15rem;
+  }
 
-    h4 {
-      font-size: 1.15rem;
-    }
+  > svg {
+    align-self: end;
+  }
 
-    > svg {
-      align-self: end;
-    }
-
-    &:hover > svg {
-      animation: 1.3s ease-in-out 0s infinite thisWaySir;
-    }
+  &:hover > svg {
+    animation: 1.3s ease-in-out 0s infinite thisWaySir;
   }
 }
 
