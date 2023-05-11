@@ -6,7 +6,6 @@ import { ArrowRight } from 'react-feather';
 import { NavLink } from 'react-router-dom';
 
 const Unauthenticated = () => {
-  const setUseSignUp = useSetAtom(signUpLoginAtom);
   const setSignUpFormIsShown = useSetAtom(loginSignupFormIsShownAtom);
 
   const openLoginModal = () => setSignUpFormIsShown(true);
@@ -29,7 +28,7 @@ const Unauthenticated = () => {
           </NavLink>
         </div>
         <div className="getstarted-option-wrapper">
-          <button type="button" className='getstarted-option transparent-text-transition'>
+          <button type="button" className='getstarted-option transparent-text-transition' onClick={openLoginModal}>
             <div>
               <h4>Create an Account</h4>
               <p>Create an account to start saving your work for next time.</p>
