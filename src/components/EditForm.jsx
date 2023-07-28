@@ -9,7 +9,7 @@ import treeHelper from '../utility/treeHelper';
 import { useAtomValue } from 'jotai';
 import { editNodeAtom } from './TaskView';
 
-const EditForm = ({ handleClose, goalId }) => {
+const EditForm = ({ handleClose, goalId, textInputRef = null }) => {
   const node = useAtomValue(editNodeAtom);
   const [name, setName] = useState(node?.name ? node.name : '');
   const queryClient = useQueryClient();
@@ -76,7 +76,13 @@ const EditForm = ({ handleClose, goalId }) => {
         value={name}
         onChange={(e) => setName(e.target.value)}
       /> */}
-      <TextInput setValue={setName} name="name" value={name} label="Name" />
+      <TextInput
+        setValue={setName}
+        name="name"
+        value={name}
+        label="Name"
+        ref={textInputRef}
+      />
       <div className="form-buttons">
         {/* <button
           className="modal-button close"

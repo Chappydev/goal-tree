@@ -1,5 +1,5 @@
 import { atom } from 'jotai';
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { ChevronLeft, ChevronRight, ChevronUp } from 'react-feather';
 import { NavLink, useParams } from 'react-router-dom';
 import useModal from '../hooks/useModal';
@@ -16,17 +16,35 @@ export const editNodeAtom = atom(null);
 export const addNodeAtom = atom(null);
 
 const TaskView = ({ goal, mutations }) => {
+  const editNodeInput = useRef(null);
+  const addNodeInput = useRef(null);
   const tree = goal.insertionNode;
   const { id } = useParams();
   const family = treeHelper.findFamilyByIdBFS(tree, id);
   const [rect, setRect] = useState(null);
   const [editIsShown, editHandleOpen, editHandleClose] = useModal(
     editIsShownAtom,
-    editNodeAtom
+    editNodeAtom,
+    () => {
+      setTimeout(() => {
+        if (editNodeInput?.current) {
+          console.log(editNodeInput.current);
+          editNodeInput.current.focus();
+        }
+      }, 100);
+    }
   );
   const [addIsShown, addHandleOpen, addHandleClose] = useModal(
     addIsShownAtom,
-    addNodeAtom
+    addNodeAtom,
+    () => {
+      setTimeout(() => {
+        if (addNodeInput?.current) {
+          console.log(addNodeInput.current);
+          addNodeInput.current.focus();
+        }
+      }, 100);
+    }
   );
 
   const arrowProps = {
@@ -97,10 +115,18 @@ const TaskView = ({ goal, mutations }) => {
         </div>
       </div>
       <Modal handleClose={editHandleClose} isShown={editIsShown}>
-        <EditForm handleClose={editHandleClose} goalId={goal.id} />
+        <EditForm
+          handleClose={editHandleClose}
+          goalId={goal.id}
+          textInputRef={editNodeInput}
+        />
       </Modal>
       <Modal handleClose={addHandleClose} isShown={addIsShown}>
-        <NewNodeForm handleClose={addHandleClose} goalId={goal.id} />
+        <NewNodeForm
+          handleClose={addHandleClose}
+          goalId={goal.id}
+          textInputRef={addNodeInput}
+        />
       </Modal>
     </div>
   );

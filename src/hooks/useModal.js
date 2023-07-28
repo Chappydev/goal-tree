@@ -25,21 +25,29 @@ import { useState } from 'react';
 //   return [isShown, openModalWithNode, closeModal, modalNode];
 // };
 
-const useModal = (atom, nodeAtom = null) => {
+const useModal = (
+  atom,
+  nodeAtom = null,
+  onOpen = () => {},
+  onClose = () => {}
+) => {
   const [isShown, setIsShown] = useAtom(atom);
   const setModalNode = useSetAtom(nodeAtom);
 
   const openModalWithNode = (node) => {
     setModalNode(node);
     setIsShown(true);
+    onOpen();
   };
 
   const openModalWithoutNode = () => {
     setIsShown(true);
+    onOpen();
   };
 
   const closeModal = () => {
     setIsShown(false);
+    onClose();
   };
 
   if (!nodeAtom) {

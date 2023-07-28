@@ -12,6 +12,7 @@ import { atom, useAtom } from 'jotai';
 import { useMediaQuery } from 'react-responsive';
 import { CheckCircle, List, LogOut, Plus } from 'react-feather';
 import { useQueryClient } from '@tanstack/react-query';
+import { useRef } from 'react';
 
 export const goalFormIsShownAtom = atom(false);
 export const loginSignupFormIsShownAtom = atom(false);
@@ -19,10 +20,29 @@ export const signUpLoginAtom = atom(true);
 
 const Navbar = () => {
   const isTaskView = useMatch('/goal/:id/task/:id');
-  const [goalFormIsShown, openGoalModal, closeGoalModal] =
-    useModal(goalFormIsShownAtom);
+  const addGoalInput = useRef(null);
+  const loginInput = useRef(null);
+  const [goalFormIsShown, openGoalModal, closeGoalModal] = useModal(
+    goalFormIsShownAtom,
+    null,
+    () => {
+      setTimeout(() => {
+        if (addGoalInput?.current) {
+          addGoalInput.current.focus();
+        }
+      }, 100);
+    }
+  );
   const [loginFormIsShown, openLoginModal, closeLoginModal] = useModal(
-    loginSignupFormIsShownAtom
+    loginSignupFormIsShownAtom,
+    null,
+    () => {
+      setTimeout(() => {
+        if (loginInput?.current) {
+          loginInput.current.focus();
+        }
+      }, 100);
+    }
   );
   const [useSignUp, setUseSignUp] = useAtom(signUpLoginAtom);
   const { isSuccess, data: user } = useUser();
@@ -94,18 +114,20 @@ const Navbar = () => {
         )}
       </div>
       <Modal handleClose={closeGoalModal} isShown={goalFormIsShown}>
-        <NewGoalForm handleClose={closeGoalModal} />
+        <NewGoalForm handleClose={closeGoalModal} textInputRef={addGoalInput} />
       </Modal>
       <Modal handleClose={closeLoginModal} isShown={loginFormIsShown}>
         {useSignUp ? (
           <SignUpForm
             handleClose={closeLoginModal}
             setUseSignUp={setUseSignUp}
+            textInputRef={loginInput}
           />
         ) : (
           <LoginForm
             handleClose={closeLoginModal}
             setUseSignUp={setUseSignUp}
+            textInputRef={loginInput}
           />
         )}
       </Modal>
