@@ -12,7 +12,7 @@ import { useAtomValue } from 'jotai';
 import { addNodeAtom } from './TaskView';
 import { useNavigate } from 'react-router-dom';
 
-const NewNodeForm = ({ handleClose, goalId }) => {
+const NewNodeForm = ({ handleClose, goalId, textInputRef = null }) => {
   const node = useAtomValue(addNodeAtom);
   const [name, setName] = useState('');
   const [ind, setInd] = useState(node ? node.children.length + 1 : 1);
@@ -120,7 +120,13 @@ const NewNodeForm = ({ handleClose, goalId }) => {
           onChange={(e) => setName(e.target.value)}
         />
       </label> */}
-      <TextInput setValue={setName} name="name" value={name} label="Name" />
+      <TextInput
+        setValue={setName}
+        name="name"
+        value={name}
+        label="Name"
+        ref={textInputRef}
+      />
       <div className="form-buttons">
         {/* <button
           className="modal-button close"

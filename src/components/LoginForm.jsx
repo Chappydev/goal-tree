@@ -6,7 +6,7 @@ import { setStoredUser } from '../utility/localUserFunctions';
 import Button from './Button';
 import TextInput from './TextInput';
 
-const LoginForm = ({ handleClose, setUseSignUp }) => {
+const LoginForm = ({ handleClose, setUseSignUp, textInputRef = null }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const login = useLogin();
@@ -40,6 +40,7 @@ const LoginForm = ({ handleClose, setUseSignUp }) => {
         value={username}
         label="Username"
         autocomplete="username"
+        ref={textInputRef}
       />
       <TextInput
         setValue={setPassword}

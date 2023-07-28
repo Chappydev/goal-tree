@@ -10,7 +10,7 @@ import Button from './Button';
 import Notification from './Notification';
 import TextInput from './TextInput';
 
-const SignUpForm = ({ handleClose, setUseSignUp }) => {
+const SignUpForm = ({ handleClose, setUseSignUp, textInputRef = null }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const debouncedUsername = useDebounceValue(username);
@@ -68,6 +68,7 @@ const SignUpForm = ({ handleClose, setUseSignUp }) => {
         name="username"
         value={username}
         label="Username"
+        ref={textInputRef}
       />
       {showAvailableNotif && <Notification notification={availableNotif} />}
       <TextInput

@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router-dom';
 
 export const goalFormIsShown = atom(false);
 
-const NewGoalForm = ({ handleClose }) => {
+const NewGoalForm = ({ handleClose, textInputRef = null }) => {
   const [name, setName] = useState('');
   const queryClient = useQueryClient();
   const navigate = useNavigate();
@@ -45,6 +45,7 @@ const NewGoalForm = ({ handleClose }) => {
         name="name"
         value={name}
         label="Goal Name"
+        ref={textInputRef}
       />
       <div className="form-buttons">
         <Button onClick={handleClose}>Close</Button>
